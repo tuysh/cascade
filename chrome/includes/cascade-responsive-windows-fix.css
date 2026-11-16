@@ -22,6 +22,14 @@
     margin-inline-start: var(--uc-urlbar-max-width) !important;
   }
 
+  /* no tab bar next to the Navigation Bar: native vertical tabs
+   * and popup windows
+   */
+  #navigator-toolbox[tabs-hidden] #nav-bar,
+  #nav-bar.browser-titlebar {
+    margin: 0 !important;
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     #nav-bar,
     #TabsToolbar {

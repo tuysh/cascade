@@ -15,9 +15,6 @@
   #nav-bar {
     order: var(--uc-urlbar-position);
     width: var(--uc-urlbar-min-width);
-    &.browser-titlebar {
-      width: 100%;
-    }
   }
 
   /* Let the URL Bar shrink instead of pushing the buttons next to it
@@ -34,15 +31,22 @@
     width: calc(100vw - var(--uc-urlbar-min-width) - 1px);
   }
 
-  #navigator-toolbox:focus-within #nav-bar {
-    width: var(--uc-urlbar-max-width);
-    &.browser-titlebar {
-      width: 100%;
+  #navigator-toolbox:focus-within {
+    #nav-bar {
+      width: var(--uc-urlbar-max-width);
+    }
+
+    #TabsToolbar {
+      width: calc(100vw - var(--uc-urlbar-max-width) - 1px);
     }
   }
 
-  #navigator-toolbox:focus-within #TabsToolbar {
-    width: calc(100vw - var(--uc-urlbar-max-width) - 1px);
+  /* no tab bar next to the Navigation Bar: native vertical tabs
+   * and popup windows
+   */
+  #navigator-toolbox[tabs-hidden] #nav-bar,
+  #nav-bar.browser-titlebar {
+    width: 100% !important;
   }
 
   /* animate the URL Bar growing on focus; both toolbars use the same
