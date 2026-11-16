@@ -32,12 +32,19 @@
   display: var(--show-tab-close-button-hover) !important;
 }
 
-/* adaptive tab width */
-.tabbrowser-tab[selected][fadein]:not([pinned]):not(tab-group[collapsed] .tabbrowser-tab) {
-  max-width: var(--uc-active-tab-width) !important;
-}
-.tabbrowser-tab[fadein]:not([selected]):not([pinned]):not(tab-group[collapsed] .tabbrowser-tab) {
-  max-width: var(--uc-inactive-tab-width) !important;
+/* adaptive tab width; vertical tabs fill the sidebar instead. The tabs
+   Firefox hides in a collapsed group keep its own width */
+#tabbrowser-tabs[orient="horizontal"] {
+  .tabbrowser-tab[selected][fadein]:not([pinned]):not(
+      tab-group[collapsed][movingtabgroup] .tabbrowser-tab
+    ) {
+    max-width: var(--uc-active-tab-width) !important;
+  }
+  .tabbrowser-tab[fadein]:not([selected], [pinned]):not(
+      tab-group[collapsed] .tabbrowser-tab:not([multiselected])
+    ) {
+    max-width: var(--uc-inactive-tab-width) !important;
+  }
 }
 
 /* space between the tab edge and its content */
@@ -81,7 +88,6 @@
 /* tab shape */
 .tab-background {
   margin-block: var(--uc-tab-margin) !important;
-  margin-inline: 0px !important;
   border-radius: var(--uc-tab-border-radius) !important;
 }
 
@@ -90,10 +96,20 @@ tab-split-view-wrapper .tab-background {
   margin-block: 0px !important;
 }
 
-/* active tab: highlight colour, plus an accent coloured line
-   when the tabs are horizontal */
+/* active tab: highlight colour, plus an accent coloured line under it
+   (horizontal tabs) or next to it (vertical tabs) */
 .tabbrowser-tab[selected] .tab-background {
   background: var(--uc-highlight-colour) !important;
+}
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected] .tab-background {
+  background:
+    linear-gradient(var(--uc-accent-colour), var(--uc-accent-colour)) left
+      center / var(--uc-active-tab-line) 50% no-repeat,
+    var(--uc-highlight-colour) !important;
+
+  &:dir(rtl) {
+    background-position: right center, 0 0 !important;
+  }
 }
 #tabbrowser-tabs[orient="horizontal"]
   .tabbrowser-tab[selected]

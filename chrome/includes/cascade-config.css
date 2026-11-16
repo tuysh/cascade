@@ -150,7 +150,8 @@
 
 :root {
   /*  Allow tabs to have dynamic widths based on
-   *  the Tab Bars maximum width
+   *  the Tab Bars maximum width (horizontal tabs only;
+   *  vertical tabs fill the sidebar)
    */
   --uc-active-tab-width: clamp(100px, 30vw, 300px);
   --uc-inactive-tab-width: clamp(100px, 20vw, 200px);
@@ -169,7 +170,8 @@
   --uc-tab-margin: var(--tab-margin-block);
 
   /*  Thickness of the accent coloured line
-   *  marking the active tab
+   *  marking the active tab (under it, or next to it
+   *  with vertical tabs)
    *  0px disables the line
    */
   --uc-active-tab-line: 2px;

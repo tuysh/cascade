@@ -35,7 +35,12 @@
 
   /* tabs */
   --tab-background-color: transparent !important;
-  --tab-background-color-hover: var(--uc-highlight-colour) !important;
+  /* half way to the highlight, so a hovered tab does not look selected */
+  --tab-background-color-hover: color-mix(
+    in srgb,
+    var(--uc-highlight-colour) 50%,
+    var(--uc-base-colour)
+  ) !important;
   --tab-background-color-selected: var(--uc-highlight-colour) !important;
   --tab-text-color-selected: var(--uc-inverted-colour) !important;
   --tab-border-color-selected-leading: transparent !important;

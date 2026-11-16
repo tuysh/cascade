@@ -93,7 +93,7 @@ problema visto desde áreas distintas. Orden = prioridad.
 | B2 | Privacidad: no ocultar los indicadores de cámara/micrófono/pantalla/ubicación | urlbar-01, config-01, product-10 | hecho: verificado en FF160 (icono de cámara visible al compartir) |
 | B3 | Foco de teclado: anillos visibles y en color de acento (barra de URL, pestaña activa, botones), sin atenuar lo enfocado | urlbar-02, palettes-01, tabs-01, palettes-02, palettes-03, urlbar-06, product-05, palettes-04, colours-01, product-06 | hecho: verificado en FF160 (anillos en pestaña activa, pestaña con Ctrl+→, estrella; vista dividida y buscador lateral en acento) |
 | B4 | Paletas: Ayu, por defecto (muted claro), Catppuccin, Rosé Pine, Nord, Gruvbox; highlight ≈ base | palettes-05..11, urlbar-07, colours-16, product-08 | hecho: 8 paletas renderizadas en FF160 en oscuro y claro (falta la barra de acento en el resultado seleccionado de palettes-11, va en B9) |
-| B5 | Pestañas verticales: márgenes, anchos adaptativos, iconos centrados al plegar, hover ≠ activa | tabs-02, tabs-03, product-02, tabs-14, palettes-16, product-07 | pendiente |
+| B5 | Pestañas verticales: márgenes, anchos adaptativos, iconos centrados al plegar, hover ≠ activa | tabs-02, tabs-03, product-02, tabs-14, palettes-16, product-07 | hecho: verificado en FF160 (expandida, plegada, hover) |
 | B6 | Layout de una línea: animación al redimensionar (@property), ventana nueva con URL enfocada, modo personalizar, código muerto, salto de 20px al crecer | oneline-01, oneline-03, oneline-04, config-09, oneline-06, oneline-08, product-01 | pendiente |
 | B7 | Quitar/neutralizar cascade-responsive-windows-fix.css (obsoleto en FF160) | oneline-02, oneline-05, config-14, extensions-02 | pendiente |
 | B8 | Pestañas: grupos (selector roto), botones de cerrar, sonido en fijadas, línea de acento en fijadas, vista dividida, ancho adaptativo, botón nueva pestaña como opción, radios, arrastre, alturas por densidad | tabs-04..13, tabs-15..20, config-02, config-07, config-08, product-04, product-11, product-12, tabs-09 | pendiente |
@@ -133,3 +133,7 @@ problema visto desde áreas distintas. Orden = prioridad.
   highlight claro ya no es más claro que la base, hex corregidos. Por defecto:
   muted claro ya no es más oscuro que el texto, morado oscuro más legible, colores
   de contenedor claros con contraste ≥ 4.5:1.
+- **B5** `fix(tabs)`: pestañas verticales separadas del borde, iconos centrados con la
+  barra plegada, anchos adaptativos solo en horizontal (antes cortaban los títulos a
+  200px en la barra lateral), línea de acento vertical junto a la pestaña activa, y
+  hover a medio camino del highlight para no confundirse con la pestaña activa.
