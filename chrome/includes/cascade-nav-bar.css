@@ -22,5 +22,5 @@
 
 .urlbarView-row:hover > .urlbarView-row-inner,
 .urlbarView-row[selected] > .urlbarView-row-inner {
-  background: var(--uc-highlight-colour) !important;
+  background: var(--uc-urlbar-selection-colour) !important;
 }

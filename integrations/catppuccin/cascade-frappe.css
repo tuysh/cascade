@@ -76,8 +76,8 @@
   --tab-border-color-selected-trailing: transparent !important;
 
   /* URL bar */
-  --toolbar-field-background-color: var(--uc-base-colour) !important;
-  --toolbar-field-background-color-focus: var(--uc-base-colour) !important;
+  --toolbar-field-background-color: var(--uc-urlbar-colour) !important;
+  --toolbar-field-background-color-focus: var(--uc-urlbar-colour) !important;
   --toolbar-field-text-color: var(--uc-inverted-colour) !important;
   --toolbar-field-text-color-focus: var(--uc-inverted-colour) !important;
   --toolbar-field-border-color: transparent !important;
@@ -85,21 +85,21 @@
   --lwt-toolbar-field-highlight: var(--uc-inverted-colour) !important;
   --lwt-toolbar-field-highlight-text: var(--uc-highlight-colour) !important;
 
-  --urlbar-box-background-color: var(--uc-highlight-colour) !important;
-  --urlbar-box-background-color-hover: var(--uc-highlight-colour) !important;
-  --urlbar-box-background-color-active: var(--uc-highlight-colour) !important;
-  --urlbar-box-background-color-focus: var(--uc-highlight-colour) !important;
+  --urlbar-box-background-color: var(--uc-urlbar-selection-colour) !important;
+  --urlbar-box-background-color-hover: var(--uc-urlbar-selection-colour) !important;
+  --urlbar-box-background-color-active: var(--uc-urlbar-selection-colour) !important;
+  --urlbar-box-background-color-focus: var(--uc-urlbar-selection-colour) !important;
   --urlbar-box-text-color: var(--uc-muted-colour) !important;
   --urlbar-box-text-color-hover: var(--uc-inverted-colour) !important;
   --urlbar-box-text-color-active: var(--uc-inverted-colour) !important;
 
   /* URL bar results */
-  --urlbarview-background-color-hover: var(--uc-highlight-colour) !important;
-  --urlbarview-background-color-selected: var(--uc-highlight-colour) !important;
+  --urlbarview-background-color-hover: var(--uc-urlbar-selection-colour) !important;
+  --urlbarview-background-color-selected: var(--uc-urlbar-selection-colour) !important;
   --urlbarview-text-color-hover: var(--uc-inverted-colour) !important;
   --urlbarview-text-color-selected: var(--uc-inverted-colour) !important;
   --urlbarview-text-color-action: var(--uc-muted-colour) !important;
-  --urlbarview-separator-color: var(--uc-highlight-colour) !important;
+  --urlbarview-separator-color: var(--uc-urlbar-selection-colour) !important;
 
   /* sidebar */
   --sidebar-background-color: var(--uc-base-colour) !important;
