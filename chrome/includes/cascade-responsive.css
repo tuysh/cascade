@@ -28,7 +28,8 @@
       width: 100%;
     }
   }
-  #navigator-toolbox:focus-within #titlebar {
+
+  #navigator-toolbox:focus-within #TabsToolbar {
     width: calc(100vw - var(--uc-urlbar-max-width) - 1px);
   }
 }

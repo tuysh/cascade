@@ -51,7 +51,10 @@
             }
         }
 
-        /* hide sidebar */
+        /* hide the native sidebar launcher
+           (#sidebar-main was renamed to #sidebar-container) */
+        #sidebar-container,
+        #sidebar-launcher-splitter,
         #sidebar-main {
             display: none;
         }

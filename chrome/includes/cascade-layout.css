@@ -1,11 +1,20 @@
 :root {
   --toolbarbutton-border-radius: var(--uc-border-radius) !important;
   --tab-border-radius: var(--uc-border-radius) !important;
-  --arrowpanel-border-radius: var(--uc-border-radius) !important;
+  --urlbar-border-radius: var(--uc-border-radius) !important;
+  --popup-border-radius: var(--uc-border-radius) !important;
+  --panel-border-radius: var(--uc-border-radius) !important;
+  --panel-menuitem-border-radius: max(
+    0px,
+    calc(var(--uc-border-radius) - 4px)
+  ) !important;
+
+  /* hide the line between the toolbars and the page */
+  --chrome-content-separator-color: transparent !important;
 }
 
 #toolbar-menubar {
-  &[autohide="true"] {
+  &[autohide] {
     &[inactive]:not([customizing]) {
       width: 0px;
     }
@@ -34,14 +43,6 @@
 /* remove "padding" left and right from tabs */
 .titlebar-spacer {
   display: none !important;
-}
-
-/* fix Shield Icon padding */
-#urlbar-input-container[pageproxystate="valid"]
-  > #tracking-protection-icon-container
-  > #tracking-protection-icon-box
-  > #tracking-protection-icon {
-  padding-bottom: 1px;
 }
 
 #TabsToolbar {

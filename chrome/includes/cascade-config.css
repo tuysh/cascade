@@ -113,7 +113,7 @@
 /* #page-action-buttons > :not(#urlbar-zoom-button) { display: none !important; } */
 
 /* Hide the »Go«-arrow in the URL Bar */
-#urlbar-go-button {
+.urlbar-go-button {
   display: none !important;
 }
 
@@ -133,21 +133,21 @@
 
   /*  Enable this to always show the Tab Close button
    *  possible values:
-   *  show: -moz-inline-block
+   *  show: flex
    *  hide: none
    */
   --show-tab-close-button: none;
 
   /*  Enable this to only show the Tab Close button on tab hover
    *  possible values:
-   *  show: -moz-inline-block
+   *  show: flex
    *  hide: none
    */
   --show-tab-close-button-hover: none;
 
   /*  Hide the all Tabs button from the Tab Bar
    *  possible values:
-   *  show: -moz-box
+   *  show: flex
    *  hide: none
    */
   --uc-show-all-tabs-button: none;
@@ -162,10 +162,4 @@
    *  Setting it to 0 disables the Glow
    */
   --uc-identity-glow: 0 1px 10px 1px;
-}
-
-/* Hide the secondary Tab Label
- * e.g. playing indicator (the text, not the icon) */
-.tab-secondary-label {
-  display: none !important;
 }

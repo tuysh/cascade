@@ -1,17 +1,17 @@
 @media (min-width: 1000px) {
   #nav-bar {
-    margin: calc((var(--urlbar-min-height) * -1) - 12px)
+    margin: calc((var(--urlbar-height) + 2 * var(--urlbar-padding-block)) * -1)
       calc(100vw - var(--uc-urlbar-min-width)) 0 0 !important;
   }
-  #titlebar {
+  #TabsToolbar {
     margin-inline-start: var(--uc-urlbar-min-width) !important;
   }
 
   #navigator-toolbox:focus-within #nav-bar {
-    margin: calc((var(--urlbar-min-height) * -1) - 12px)
+    margin: calc((var(--urlbar-height) + 2 * var(--urlbar-padding-block)) * -1)
       calc(100vw - var(--uc-urlbar-max-width)) 0 0 !important;
   }
-  #navigator-toolbox:focus-within #titlebar {
+  #navigator-toolbox:focus-within #TabsToolbar {
     margin-inline-start: var(--uc-urlbar-max-width) !important;
   }
 }

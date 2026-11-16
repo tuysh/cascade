@@ -18,7 +18,7 @@
    *  inside the URL Bar. This might need
    *  customisation depending on your setup!
    */
-  --uc-page-action-margin: 7px;
+  --uc-page-action-margin: 0px;
 }
 
 /* remove window control buttons */
@@ -108,7 +108,7 @@
 }
 
 /* Hide the »Go«-arrow in the URL Bar */
-#urlbar-go-button {
+.urlbar-go-button {
   display: none !important;
 }
 
@@ -132,17 +132,17 @@
 
   /*  Enable this to always show the Tab Close button
    *  possible values:
-   *  show: -moz-inline-block
+   *  show: flex
    *  hide: none
    */
   --show-tab-close-button: none;
 
   /*  Enable this to only show the Tab Close button on tab hover
    *  possible values:
-   *  show: -moz-inline-block
+   *  show: flex
    *  hide: none
    */
-  --show-tab-close-button-hover: -moz-inline-block;
+  --show-tab-close-button-hover: flex;
 
   /*  Left and Right "dip" of the container indicator
    *  0px equals tab width
@@ -154,10 +154,4 @@
    *  Setting it to 0 disables the Glow
    */
   --uc-identity-glow: 0 1px 10px 1px;
-}
-
-/* Hide the secondary Tab Label
- * e.g. playing indicator (the text, not the icon) */
-.tab-secondary-label {
-  display: none !important;
 }
