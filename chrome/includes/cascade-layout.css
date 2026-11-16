@@ -1,3 +1,11 @@
+/* Defaults for options that a config file from an older version of
+   Cascade does not define yet. :where() has no specificity, so the
+   values in the config file always win. */
+:where(:root) {
+  --uc-content-margin: 6px;
+  --uc-content-border-radius: var(--uc-border-radius);
+}
+
 :root {
   --toolbarbutton-border-radius: var(--uc-border-radius) !important;
   --tab-border-radius: var(--uc-border-radius) !important;
@@ -68,4 +76,17 @@
 #statuspanel #statuspanel-label {
   border: none !important;
   border-radius: var(--uc-border-radius) !important;
+}
+
+/* "floating" page: a gap around the page and rounded corners;
+   not while a video or the window is in fullscreen */
+:root:not([inFullscreen], [inDOMFullscreen]) {
+  #tabbrowser-tabbox {
+    padding: 0 var(--uc-content-margin) var(--uc-content-margin) !important;
+  }
+
+  #tabbrowser-tabpanels .browserContainer {
+    border-radius: var(--uc-content-border-radius) !important;
+    overflow: clip !important;
+  }
 }

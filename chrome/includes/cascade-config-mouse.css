@@ -20,6 +20,13 @@
    */
   --uc-inactive-opacity: 0.65;
 
+  /*  "Floating" page: the gap between the window border
+   *  and the page, and the radius of the page corners
+   *  0px for both attaches the page to the window again
+   */
+  --uc-content-margin: 6px;
+  --uc-content-border-radius: var(--uc-border-radius);
+
   /*  Top margin for the Page Action Buttons
    *  inside the URL Bar. This might need
    *  customisation depending on your setup!
