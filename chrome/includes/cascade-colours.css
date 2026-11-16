@@ -25,7 +25,7 @@
     --uc-identity-colour-orange: #f19066;
     --uc-identity-colour-red: #fc5c65;
     --uc-identity-colour-pink: #f78fb3;
-    --uc-identity-colour-purple: #786fa6;
+    --uc-identity-colour-purple: #a098cd;
 
     /*  Cascades main Colour Scheme */
     --uc-base-colour: #1e2021;
@@ -41,19 +41,19 @@
     /* These colours are (mainly) used by the
      Container Tabs Plugin */
     --uc-identity-colour-blue: #1d65f5;
-    --uc-identity-colour-turquoise: #209fb5;
-    --uc-identity-colour-green: #40a02b;
-    --uc-identity-colour-yellow: #e49320;
-    --uc-identity-colour-orange: #fe640b;
-    --uc-identity-colour-red: #fc5c65;
-    --uc-identity-colour-pink: #ec83d0;
+    --uc-identity-colour-turquoise: #13798c;
+    --uc-identity-colour-green: #2f7d20;
+    --uc-identity-colour-yellow: #936c00;
+    --uc-identity-colour-orange: #ba5100;
+    --uc-identity-colour-red: #d02f3c;
+    --uc-identity-colour-pink: #b8338f;
     --uc-identity-colour-purple: #822fee;
 
     /*  Cascades main Colour Scheme */
     --uc-base-colour: #fafafc;
     --uc-highlight-colour: #dadadc;
     --uc-inverted-colour: #1e2021;
-    --uc-muted-colour: #191b1c;
+    --uc-muted-colour: #55575b;
     --uc-accent-colour: var(--uc-identity-colour-purple);
   }
 }

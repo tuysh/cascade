@@ -14,25 +14,27 @@
  *  accent     active tab line, focus rings, links
  */
 
+/*  Nord, https://www.nordtheme.com/docs/colors-and-palettes */
+
 @media (prefers-color-scheme: dark) {
   :root {
     /* These colours are (mainly) used by the
      Container Tabs Plugin */
-    --uc-identity-colour-blue: #5e81ac;
-    --uc-identity-colour-turquoise: #8fbcbb;
-    --uc-identity-colour-green: #a3be8c;
-    --uc-identity-colour-yellow: #ebcb8b;
-    --uc-identity-colour-orange: #d08770;
-    --uc-identity-colour-red: #bf616a;
-    --uc-identity-colour-pink: #d1889f;
-    --uc-identity-colour-purple: #b48ead;
+    --uc-identity-colour-blue: #81a1c1; /* nord9 */
+    --uc-identity-colour-turquoise: #8fbcbb; /* nord7 */
+    --uc-identity-colour-green: #a3be8c; /* nord14 */
+    --uc-identity-colour-yellow: #ebcb8b; /* nord13 */
+    --uc-identity-colour-orange: #d08770; /* nord12 */
+    --uc-identity-colour-red: #bf616a; /* nord11 */
+    --uc-identity-colour-pink: #d1889f; /* Nord has no pink */
+    --uc-identity-colour-purple: #b48ead; /* nord15 */
 
     /*  Cascades main Colour Scheme */
-    --uc-base-colour: #2e3440;
-    --uc-highlight-colour: #4c566a;
-    --uc-inverted-colour: #eceff4;
-    --uc-muted-colour: #d8dee9;
-    --uc-accent-colour: var(--uc-identity-colour-purple);
+    --uc-base-colour: #2e3440; /* nord0 */
+    --uc-highlight-colour: #3b4252; /* nord1 */
+    --uc-inverted-colour: #eceff4; /* nord6 */
+    --uc-muted-colour: #a7aebd; /* nord4 65% + nord3 */
+    --uc-accent-colour: #88c0d0; /* nord8, Nord's accent */
   }
 }
 
@@ -40,20 +42,20 @@
   :root {
     /* These colours are (mainly) used by the
      Container Tabs Plugin */
-    --uc-identity-colour-blue: #5e81ac;
-    --uc-identity-colour-turquoise: #8fbcbb;
-    --uc-identity-colour-green: #a3be8c;
-    --uc-identity-colour-yellow: #ebcb8b;
-    --uc-identity-colour-orange: #d08770;
-    --uc-identity-colour-red: #bf616a;
-    --uc-identity-colour-pink: #d1889f;
-    --uc-identity-colour-purple: #b48ead;
+    --uc-identity-colour-blue: #5e81ac; /* nord10 */
+    --uc-identity-colour-turquoise: #8fbcbb; /* nord7 */
+    --uc-identity-colour-green: #a3be8c; /* nord14 */
+    --uc-identity-colour-yellow: #ebcb8b; /* nord13 */
+    --uc-identity-colour-orange: #d08770; /* nord12 */
+    --uc-identity-colour-red: #bf616a; /* nord11 */
+    --uc-identity-colour-pink: #d1889f; /* Nord has no pink */
+    --uc-identity-colour-purple: #b48ead; /* nord15 */
 
     /*  Cascades main Colour Scheme */
-    --uc-base-colour: #eceff4;
-    --uc-highlight-colour: #d8dee9;
-    --uc-inverted-colour: #2e3440;
-    --uc-muted-colour: #4c566a;
-    --uc-accent-colour: var(--uc-identity-colour-purple);
+    --uc-base-colour: #eceff4; /* nord6 */
+    --uc-highlight-colour: #d8dee9; /* nord4 */
+    --uc-inverted-colour: #2e3440; /* nord0 */
+    --uc-muted-colour: #4c566a; /* nord3 */
+    --uc-accent-colour: var(--uc-identity-colour-blue); /* nord10 */
   }
 }

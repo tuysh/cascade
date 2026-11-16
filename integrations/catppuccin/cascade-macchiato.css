@@ -14,24 +14,26 @@
  *  accent     active tab line, focus rings, links
  */
 
+/*  Catppuccin Macchiato (dark) and Latte (light), https://catppuccin.com/palette */
+
 @media (prefers-color-scheme: dark) {
   :root {
     /* These colours are (mainly) used by the
      Container Tabs Plugin */
     --uc-identity-colour-blue: #8aadf4;
-    --uc-identity-colour-turquoise: #8bd5ca;
+    --uc-identity-colour-turquoise: #8bd5ca; /* teal */
     --uc-identity-colour-green: #a6da95;
     --uc-identity-colour-yellow: #eed49f;
-    --uc-identity-colour-orange: #f5a97f;
+    --uc-identity-colour-orange: #f5a97f; /* peach */
     --uc-identity-colour-red: #ed8796;
     --uc-identity-colour-pink: #f5bde6;
-    --uc-identity-colour-purple: #c6a0f6;
+    --uc-identity-colour-purple: #c6a0f6; /* mauve */
 
     /*  Cascades main Colour Scheme */
-    --uc-base-colour: #24273a;
-    --uc-highlight-colour: #1e2030;
-    --uc-inverted-colour: #cad3f5;
-    --uc-muted-colour: #6e738d;
+    --uc-base-colour: #24273a; /* base */
+    --uc-highlight-colour: #363a4f; /* surface0 */
+    --uc-inverted-colour: #cad3f5; /* text */
+    --uc-muted-colour: #a5adcb; /* subtext0 */
     --uc-accent-colour: var(--uc-identity-colour-purple);
   }
 }
@@ -41,19 +43,19 @@
     /* These colours are (mainly) used by the
      Container Tabs Plugin */
     --uc-identity-colour-blue: #1e66f5;
-    --uc-identity-colour-turquoise: #179299;
+    --uc-identity-colour-turquoise: #179299; /* teal */
     --uc-identity-colour-green: #40a02b;
     --uc-identity-colour-yellow: #df8e1d;
-    --uc-identity-colour-orange: #fe640b;
+    --uc-identity-colour-orange: #fe640b; /* peach */
     --uc-identity-colour-red: #d20f39;
-    --uc-identity-colour-pink: #d20f39;
-    --uc-identity-colour-purple: #8839ef;
+    --uc-identity-colour-pink: #ea76cb;
+    --uc-identity-colour-purple: #8839ef; /* mauve */
 
     /*  Cascades main Colour Scheme */
-    --uc-base-colour: #eff1f5;
-    --uc-highlight-colour: #dce0e8;
-    --uc-inverted-colour: #4c4f69;
-    --uc-muted-colour: #9ca0b0;
+    --uc-base-colour: #eff1f5; /* base */
+    --uc-highlight-colour: #ccd0da; /* surface0 */
+    --uc-inverted-colour: #4c4f69; /* text */
+    --uc-muted-colour: #5c5f77; /* subtext1 */
     --uc-accent-colour: var(--uc-identity-colour-purple);
   }
 }

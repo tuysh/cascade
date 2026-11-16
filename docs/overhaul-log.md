@@ -92,7 +92,7 @@ problema visto desde áreas distintas. Orden = prioridad.
 | B1 | Separar paleta y mapeo de colores (integraciones = solo paleta, compatibles hacia atrás) | config-03, colours-18, urlbar-09, palettes-20 | hecho: mapeo en `cascade-colours-mapping.css`; 0 píxeles de diferencia, también con un userChrome.css viejo y con una integración vieja de copia completa |
 | B2 | Privacidad: no ocultar los indicadores de cámara/micrófono/pantalla/ubicación | urlbar-01, config-01, product-10 | hecho: verificado en FF160 (icono de cámara visible al compartir) |
 | B3 | Foco de teclado: anillos visibles y en color de acento (barra de URL, pestaña activa, botones), sin atenuar lo enfocado | urlbar-02, palettes-01, tabs-01, palettes-02, palettes-03, urlbar-06, product-05, palettes-04, colours-01, product-06 | hecho: verificado en FF160 (anillos en pestaña activa, pestaña con Ctrl+→, estrella; vista dividida y buscador lateral en acento) |
-| B4 | Paletas: Ayu, por defecto (muted claro), Catppuccin, Rosé Pine, Nord, Gruvbox; highlight ≈ base | palettes-05..11, urlbar-07, colours-16, product-08 | pendiente |
+| B4 | Paletas: Ayu, por defecto (muted claro), Catppuccin, Rosé Pine, Nord, Gruvbox; highlight ≈ base | palettes-05..11, urlbar-07, colours-16, product-08 | hecho: 8 paletas renderizadas en FF160 en oscuro y claro (falta la barra de acento en el resultado seleccionado de palettes-11, va en B9) |
 | B5 | Pestañas verticales: márgenes, anchos adaptativos, iconos centrados al plegar, hover ≠ activa | tabs-02, tabs-03, product-02, tabs-14, palettes-16, product-07 | pendiente |
 | B6 | Layout de una línea: animación al redimensionar (@property), ventana nueva con URL enfocada, modo personalizar, código muerto, salto de 20px al crecer | oneline-01, oneline-03, oneline-04, config-09, oneline-06, oneline-08, product-01 | pendiente |
 | B7 | Quitar/neutralizar cascade-responsive-windows-fix.css (obsoleto en FF160) | oneline-02, oneline-05, config-14, extensions-02 | pendiente |
@@ -125,3 +125,11 @@ problema visto desde áreas distintas. Orden = prioridad.
   anillos de foco) sigue la paleta. Nuevo `--uc-accent-text-colour` (acento con la
   luminosidad ajustada en oklch para que se lea como texto en cualquier paleta) y
   texto de botones primarios con `contrast-color()`.
+- **B4** `fix(colours)`: paletas corregidas con los valores oficiales y roles
+  correctos. Ayu rehecha (Mirage/Light; antes el modo claro era oscuro y el oscuro no
+  marcaba la pestaña activa). Catppuccin: highlight = surface0, muted = subtext0/1,
+  rosa de Latte correcto. Rosé Pine: highlight = overlay, muted = subtle, contenedor
+  azul y rosa correctos. Nord: muted distinguible, acento nord8/nord10. Gruvbox:
+  highlight claro ya no es más claro que la base, hex corregidos. Por defecto:
+  muted claro ya no es más oscuro que el texto, morado oscuro más legible, colores
+  de contenedor claros con contraste ≥ 4.5:1.

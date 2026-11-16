@@ -14,25 +14,27 @@
  *  accent     active tab line, focus rings, links
  */
 
+/*  ayu Mirage (dark) and ayu Light (light), https://github.com/ayu-theme/ayu-colors */
+
 @media (prefers-color-scheme: dark) {
   :root {
     /* These colours are (mainly) used by the
      Container Tabs Plugin */
-    --uc-identity-colour-blue: #5ccfe6;
-    --uc-identity-colour-turquoise: #73d0ff;
-    --uc-identity-colour-green: #bae67e;
-    --uc-identity-colour-yellow: #ffd580;
-    --uc-identity-colour-orange: #ffa759;
-    --uc-identity-colour-red: #ff3333;
-    --uc-identity-colour-pink: #d4bfff;
-    --uc-identity-colour-purple: #d3b8f9;
+    --uc-identity-colour-blue: #5ccfe6; /* tag */
+    --uc-identity-colour-turquoise: #95e6cb; /* regexp */
+    --uc-identity-colour-green: #bae67e; /* string */
+    --uc-identity-colour-yellow: #ffd580; /* func */
+    --uc-identity-colour-orange: #ffa759; /* keyword */
+    --uc-identity-colour-red: #ff3333; /* error */
+    --uc-identity-colour-pink: #f28779; /* markup */
+    --uc-identity-colour-purple: #d4bfff; /* constant */
 
     /*  Cascades main Colour Scheme */
-    --uc-base-colour: #1f2430;
-    --uc-highlight-colour: #1f2430;
-    --uc-inverted-colour: #bae67e;
-    --uc-muted-colour: #707a8c;
-    --uc-accent-colour: var(--uc-identity-colour-purple);
+    --uc-base-colour: #1f2430; /* bg */
+    --uc-highlight-colour: #343f4c; /* selection */
+    --uc-inverted-colour: #cbccc6; /* fg */
+    --uc-muted-colour: #939aa3; /* ui, mixed with fg to stay readable */
+    --uc-accent-colour: #ffcc66; /* accent */
   }
 }
 
@@ -40,20 +42,20 @@
   :root {
     /* These colours are (mainly) used by the
      Container Tabs Plugin */
-    --uc-identity-colour-blue: #39bae6;
-    --uc-identity-colour-turquoise: #59c2ff;
-    --uc-identity-colour-green: #c2d94c;
-    --uc-identity-colour-yellow: #ffee99;
-    --uc-identity-colour-orange: #ff8f40;
-    --uc-identity-colour-red: #ff3333;
-    --uc-identity-colour-pink: #f07178;
-    --uc-identity-colour-purple: #cb9ff8;
+    --uc-identity-colour-blue: #399ee6; /* entity */
+    --uc-identity-colour-turquoise: #4cbf99; /* regexp */
+    --uc-identity-colour-green: #86b300; /* string */
+    --uc-identity-colour-yellow: #f2ae49; /* func */
+    --uc-identity-colour-orange: #fa8d3e; /* keyword */
+    --uc-identity-colour-red: #f51818; /* error */
+    --uc-identity-colour-pink: #f07171; /* markup */
+    --uc-identity-colour-purple: #a37acc; /* constant */
 
     /*  Cascades main Colour Scheme */
-    --uc-base-colour: #0a0e14;
-    --uc-highlight-colour: #e6b450;
-    --uc-inverted-colour: #b3b1ad;
-    --uc-muted-colour: #4d5566;
-    --uc-accent-colour: var(--uc-identity-colour-purple);
+    --uc-base-colour: #fafafa; /* bg */
+    --uc-highlight-colour: #e1e5e9; /* panel */
+    --uc-inverted-colour: #575f66; /* fg */
+    --uc-muted-colour: #6b737a; /* ui, mixed with fg to stay readable */
+    --uc-accent-colour: #ff9940; /* accent */
   }
 }
