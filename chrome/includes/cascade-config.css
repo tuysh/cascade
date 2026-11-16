@@ -33,18 +33,23 @@
   display: none !important;
 }
 
-#pageActionButton {
-  display: none !important;
-}
+/* hide the app menu button (≡, also on Alt+F or F10); it shows up while
+   it has the keyboard focus or something to tell (update available,
+   add-on alert, sign in to sync again) */
+#PanelUI-menu-button:not(
+    :focus-visible,
+    [badge-status^="update-"],
+    [badge-status="addon-alert"],
+    [badge-status="fxa-needs-authentication"]
+  ) {
+  padding: 0px !important;
 
-#PanelUI-menu-button {
-  padding: 0px !important;
-}
-#PanelUI-menu-button .toolbarbutton-icon {
-  width: 1px !important;
-}
-#PanelUI-menu-button .toolbarbutton-badge-stack {
-  padding: 0px !important;
+  & .toolbarbutton-icon {
+    width: 1px !important;
+  }
+  & .toolbarbutton-badge-stack {
+    padding: 0px !important;
+  }
 }
 
 /*---+---+---+---+---+---+---+
@@ -114,8 +119,12 @@
   display: none !important;
 }
 
-/* Disables the Tracking Protection Shield */
-/* #tracking-protection-icon-container { display: none !important; } */
+/* Hides the site information button (padlock / shield, »Not Secure«
+   label and the »N trackers blocked« counter) */
+/* #trust-icon-container { display: none !important; } */
+
+/* Only hides the »N trackers blocked« counter next to the shield */
+/* :is(#trust-icon-tracker-count-longform-wrapper, #trust-icon-tracker-count-shortform-wrapper) { display: none !important; } */
 
 /* Encryption and Permissions icons */
 /* Only hides permission items; the red camera, microphone, screen

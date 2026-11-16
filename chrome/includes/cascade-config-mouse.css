@@ -39,10 +39,6 @@
   display: none !important;
 }
 
-#pageActionButton {
-  display: none !important;
-}
-
 /*---+---+---+---+---+---+---+
  | T | O | O | L | B | A | R |
  +---+---+---+---+---+---+---*/
@@ -108,8 +104,12 @@
 /* #back-button,
 #forward-button { display: none !important; } */
 
-/* Disables the Tracking Protection Shield */
-/* #tracking-protection-icon-container { display: none !important; } */
+/* Hides the site information button (padlock / shield, »Not Secure«
+   label and the »N trackers blocked« counter) */
+/* #trust-icon-container { display: none !important; } */
+
+/* Only hides the »N trackers blocked« counter next to the shield */
+/* :is(#trust-icon-tracker-count-longform-wrapper, #trust-icon-tracker-count-shortform-wrapper) { display: none !important; } */
 
 /* Encryption and Permissions icons */
 /* Only hides permission items; the red camera, microphone, screen

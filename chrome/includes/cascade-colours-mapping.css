@@ -57,8 +57,16 @@
   --lwt-toolbar-field-highlight-text: var(--uc-highlight-colour) !important;
 
   --urlbar-box-background-color: var(--uc-urlbar-selection-colour) !important;
-  --urlbar-box-background-color-hover: var(--uc-urlbar-selection-colour) !important;
-  --urlbar-box-background-color-active: var(--uc-urlbar-selection-colour) !important;
+  --urlbar-box-background-color-hover: color-mix(
+    in srgb,
+    var(--uc-inverted-colour) 12%,
+    var(--uc-urlbar-selection-colour)
+  ) !important;
+  --urlbar-box-background-color-active: color-mix(
+    in srgb,
+    var(--uc-inverted-colour) 20%,
+    var(--uc-urlbar-selection-colour)
+  ) !important;
   --urlbar-box-background-color-focus: var(--uc-urlbar-selection-colour) !important;
   --urlbar-box-text-color: var(--uc-muted-colour) !important;
   --urlbar-box-text-color-hover: var(--uc-inverted-colour) !important;

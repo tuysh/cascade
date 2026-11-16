@@ -32,10 +32,17 @@
   --chrome-content-separator-color: transparent !important;
 }
 
-/* buttons inside the URL Bar (search engine switcher, »Switch to Tab«)
-   are pills by default; give them the radius of the other boxes in it */
+/* buttons are pills in Nova; give them the radius of everything else
+   (notification bars, panels, the find bar), and inside the URL Bar
+   (search engine switcher) the radius of the other boxes in it */
+:root {
+  --button-border-radius: var(--uc-border-radius) !important;
+}
 #urlbar {
   --button-border-radius: var(--urlbar-inner-border-radius) !important;
+}
+.findbar-textbox {
+  border-radius: var(--uc-border-radius) !important;
 }
 
 /* the hidden menu bar takes no room (Firefox keeps 1px, 100px in

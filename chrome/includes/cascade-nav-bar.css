@@ -29,12 +29,40 @@
   border-color: transparent !important;
 }
 
-.urlbarView-row:hover > .urlbarView-row-inner,
-.urlbarView-row[selected] > .urlbarView-row-inner {
-  background: var(
-    --uc-urlbar-selection-colour,
-    var(--uc-base-colour)
+/* mark the result Enter opens with an accent coloured line, like the
+   active tab, so it shows whatever the two URL Bar colours are and it
+   does not look like a hovered result */
+.urlbarView-row[selected] {
+  background-image: linear-gradient(
+    var(--uc-accent-colour),
+    var(--uc-accent-colour)
   ) !important;
+  background-repeat: no-repeat !important;
+  background-origin: content-box !important;
+  background-size: var(--uc-active-tab-line, 2px) 50% !important;
+  background-position: left center !important;
+
+  &:dir(rtl) {
+    background-position: right center !important;
+  }
+}
+
+/* selected text in the URL Bar and the find bar; Firefox only uses these
+   colours while a theme is installed */
+:is(.urlbar-input, .findbar-textbox)::selection {
+  background-color: var(--lwt-toolbar-field-highlight) !important;
+  color: var(--lwt-toolbar-field-highlight-text) !important;
+}
+
+/* the »Switch to Tab« chips and other buttons in the results get the
+   radius of the other boxes in the URL Bar */
+.urlbarView-row
+  :is(
+    .urlbarView-action,
+    .urlbarView-switchToTab-accessory,
+    .urlbarView-action-btn
+  ) {
+  border-radius: var(--urlbar-inner-border-radius) !important;
 }
 
 /* dim the toolbar buttons until they are hovered, focused or in use;
