@@ -2,6 +2,11 @@
    Cascade does not define yet. :where() has no specificity, so the
    values in the config file always win. */
 :where(:root) {
+  --uc-border-radius: 8px;
+  --uc-active-tab-width: clamp(100px, 30vw, 300px);
+  --uc-inactive-tab-width: clamp(100px, 20vw, 200px);
+  --container-tabs-indicator-margin: 10px;
+  --uc-identity-glow: 0 1px 10px 1px;
   --uc-tab-padding: 14px;
   --uc-tab-border-radius: var(--uc-border-radius);
   --uc-tab-margin: calc((var(--tabstrip-min-height) - var(--urlbar-height)) / 2);
@@ -9,9 +14,11 @@
   --uc-inactive-opacity: 0.65;
 }
 
-/* the »List all tabs« button; customize mode always shows it */
+/* the »List all tabs« button; customize mode always shows it. Older
+   mouse configs do not set the option, and pushed the button 5px down */
 :root:not([customizing]) #alltabs-button {
-  display: var(--uc-show-all-tabs-button) !important;
+  display: var(--uc-show-all-tabs-button, flex) !important;
+  margin-top: 0 !important;
 }
 
 /* remove tab shadow, but keep the stacked look of several tabs being
@@ -27,7 +34,7 @@
 
 /* tab close button options */
 .tabbrowser-tab:not([pinned]) .tab-close-button {
-  display: var(--show-tab-close-button) !important;
+  display: var(--show-tab-close-button, none) !important;
 }
 /* on hover, unless it is always shown anyway */
 @container style(--show-tab-close-button: none) {

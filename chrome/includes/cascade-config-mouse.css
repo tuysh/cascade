@@ -36,12 +36,6 @@
     var(--uc-inverted-colour) 12%,
     transparent
   );
-
-  /*  Top margin for the Page Action Buttons
-   *  inside the URL Bar. This might need
-   *  customisation depending on your setup!
-   */
-  --uc-page-action-margin: 0px;
 }
 
 /* remove window control buttons (minimise, maximise, close); on macOS
@@ -147,11 +141,6 @@
    sharing items */
 /* #identity-box { display: none !important } */
 
-/* Adjust margin of the urlbar buttons. */
-.urlbar-page-action > image {
-  margin-top: var(--uc-page-action-margin) !important;
-}
-
 /* Hide Container Tab labels inside the URL bar */
 #userContext-icons {
   display: none !important;
@@ -170,10 +159,6 @@
    overflowing tab bar stays */
 /* #tabs-newtab-button,
 #vertical-tabs-newtab-button { display: none !important; } */
-
-#alltabs-button {
-  margin-top: 5px !important;
-}
 
 /*---+---+---+---+---+---+---+
  | T | A | B | — | B | A | R |

@@ -7,6 +7,9 @@
    Cascade does not define yet. :where() has no specificity, so the
    values in the config file always win. */
 :where(:root) {
+  --uc-border-radius: 8px;
+  --uc-toolbar-position: 4;
+  --uc-darken-toolbar: 0;
   --uc-content-margin: 6px;
   --uc-content-border-radius: var(--uc-border-radius);
   --uc-content-outline-colour: color-mix(

@@ -102,7 +102,7 @@ problema visto desde áreas distintas. Orden = prioridad.
 | B11 | Página/ventana: panel de estado espejo, hueco en vista dividida, diálogos modales, contorno de página en modo claro, controles de ventana como opción, barra de búsqueda, decoración de vista dividida | content-01..09, palettes-17, product-14, config-04, product-16 | hecho (el redondeo de la página encima de la barra de búsqueda de content-09 no se hizo); verificado en FF160 |
 | B12 | Accesibilidad extra: opacidad inactiva vs contraste, forced-colors, reduced-motion | palettes-14, palettes-15, palettes-18, product-20 | hecho salvo palettes-14 (etiquetas atenuadas con el color muted en vez de opacidad) y palettes-18 (va en B15) |
 | B13 | Menú (Alt), arrastre de ventana | oneline-07, product-13, oneline-09 | hecho salvo oneline-09 (refutado por un verificador) |
-| B14 | Configuración: defaults :where para todas las opciones, restos obsoletos del config de ratón, nombres, comentarios, .editorconfig | config-05, config-06, config-10, config-13, config-16, config-17, config-21, tabs-17 | pendiente |
+| B14 | Configuración: defaults :where para todas las opciones, restos obsoletos del config de ratón, nombres, comentarios, .editorconfig | config-05, config-06, config-10, config-13, config-16, config-17, config-21, tabs-17 | hecho salvo config-13 (renombrar opciones con fallbacks), config-17 (CI) y config-21; probado con config por defecto, de ratón, viejo y vacío |
 | B15 | Integraciones de extensiones (Tab Center Reborn, Side View) | extensions-01..13, config-15 | pendiente |
 | B16 | Documentación: README, contributing, plantillas | config-18, config-19, config-20 | pendiente |
 
@@ -189,3 +189,20 @@ problema visto desde áreas distintas. Orden = prioridad.
   transiciones de los botones respetan `prefers-reduced-motion`. Barra de menú:
   etiquetas centradas y, al pulsar Alt, en una fila propia (antes empujaba la barra
   de URL y las pestañas unos 350px).
+- **B14** `chore(config)`: todas las opciones que leen los includes tienen un
+  default `:where(:root)` (un config viejo o recortado ya no rompe nada; probado
+  con un config vacío); fuera `--uc-page-action-margin` y el `margin-top: 5px` del
+  botón de todas las pestañas en el config de ratón (desalineaban en FF160);
+  userChrome.css explica cómo cambiar al config de ratón y a una integración de
+  color; `.editorconfig` (contributing.md lo citaba y no existía).
+
+## Notas de migración para usuarios (para el changelog)
+
+- Si editaste el mapeo de colores dentro de tu `cascade-colours.css`, mueve esos
+  cambios al final de `userChrome.css`: el mapeo ahora vive en
+  `cascade-colours-mapping.css` y se carga después.
+- Si conservas un `cascade-config.css` antiguo: el botón »+« de nueva pestaña ya no
+  lo oculta `cascade-tabs.css`; copia el bloque »Hides the New Tab buttons« del
+  config nuevo. Borra también, si los tienes, `#pageActionButton {display:none}`,
+  `.urlbar-page-action > image {margin-top…}` y `#alltabs-button {margin-top:5px}`.
+- `cascade-responsive-windows-fix.css` ya no hace falta en Windows.

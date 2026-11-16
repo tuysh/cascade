@@ -2,6 +2,9 @@
    Cascade does not define yet. :where() has no specificity, so the
    values in the config file always win. */
 :where(:root) {
+  --uc-urlbar-min-width: 35vw;
+  --uc-urlbar-max-width: 45vw;
+  --uc-urlbar-position: 1;
   --uc-urlbar-transition-duration: 200ms;
 }
 

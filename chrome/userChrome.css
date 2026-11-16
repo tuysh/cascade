@@ -21,12 +21,18 @@
                   Benyamin: https://github.com/benyaminl
                   Wael:     https://github.com/wael444
 
-                  If you're looking for a **mouse-friendly** clone please check out Waterfall.
-                  https://github.com/crambaud/waterfall
+                  Mouse user? Use includes/cascade-config-mouse.css instead of
+                  includes/cascade-config.css (see the first import below).
 
 *==============================================================================================*/
 
 @import "includes/cascade-config.css";
+/* mouse friendly (back/forward, close buttons on hover, window controls):
+   use this instead of the line above */
+/* @import "includes/cascade-config-mouse.css"; */
+
+/* colour integrations: copy one of integrations/<name>/*.css over
+   includes/cascade-colours.css */
 @import "includes/cascade-colours.css";
 @import "includes/cascade-colours-mapping.css";
 

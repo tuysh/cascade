@@ -1,3 +1,10 @@
+/* Defaults for options that a config file from an older version of
+   Cascade does not define yet. :where() has no specificity, so the
+   values in the config file always win. */
+:where(:root) {
+  --uc-status-panel-spacing: 12px;
+}
+
 /* the status panel (link targets, »Waiting for …«) floats away from the
    window border; Firefox moves it to the right when the mouse gets close,
    so the margin is the same on both sides */
