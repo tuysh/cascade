@@ -1,76 +1,99 @@
-/* when TCR is active */
-#main-window:has(#sidebar-box[sidebarcommand*="tabcenter"]:not([hidden])) {
-    /* hide tab bar */
-    #TabsToolbar {
-        display: none !important;
-    }
+/* Tab Center Reborn: the tab list as a narrow strip on the side of the
+   window that grows on hover.
 
-    /* ensure nav bar is full width (for oneline layout) */
-    #nav-bar {
-        width: 100vw !important;
-    }
+   Install: copy this file to chrome/includes/ and add
+     @import "includes/cascade-tcr.css";
+   as the last import of userChrome.css. Paste tabcenter-reborn.css into
+   Tab Center Reborn's settings (custom stylesheet).
 
-    #browser {
-        position: relative !important;
+   Firefox's native vertical tabs (Settings > General > Browser Layout) do
+   the same without an extension, and Cascade styles them. */
 
-        #tabbrowser-tabbox {
-            margin-left: 50px !important;
-        }
-
-        & #sidebar {
-            border-radius: 0px !important;
-            outline: none !important;
-        }
-
-        #sidebar-box[sidebarcommand*="tabcenter"] {
-            display: block;
-
-            position: absolute !important;
-            top: 0;
-            bottom: 0;
-            z-index: 3 !important;
-            transition: all 0.2s ease;
-            overflow: hidden;
-
-            min-width: 50px !important;
-            max-width: 50px !important;
-            padding-bottom: 0px !important;
-
-            &:hover {
-                max-width: 250px !important;
-            }
-
-            /* remove sidebar separator */
-            & ~ #sidebar-splitter {
-                display: none;
-            }
-
-            /* make full height as we are positioning absolutely */
-            .sidebar-browser-stack {
-                height: 100%;
-            }
-        }
-
-        /* hide the native sidebar launcher
-           (#sidebar-main was renamed to #sidebar-container) */
-        #sidebar-container,
-        #sidebar-launcher-splitter,
-        #sidebar-main {
-            display: none;
-        }
-    }
+/* Defaults for options that a config file from an older version of
+   Cascade does not define yet. :where() has no specificity, so the
+   values in the config file always win. */
+:where(:root) {
+  --uc-tcr-collapsed-width: 50px;
+  --uc-tcr-expanded-width: 250px;
+  --uc-tcr-expand-delay: 150ms;
 }
 
-/* hide panel title */
-#sidebar-panel-header {
+/* while Tab Center Reborn is open (a video in fullscreen hides it) */
+#main-window:not([inDOMFullscreen]):has(
+    > body > #browser > #sidebar-box[sidebarcommand*="tabcenter"]:not([hidden])
+  ) {
+  /* hide the tab bar */
+  #TabsToolbar {
     display: none !important;
+  }
+
+  /* the URL Bar gets the whole row
+     (oneline layout and cascade-responsive-windows-fix.css) */
+  #nav-bar {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  /* room for the collapsed sidebar, on the side the sidebar is on */
+  #tabbrowser-tabbox:not([sidebar-positionend]) {
+    margin-inline-start: var(--uc-tcr-collapsed-width) !important;
+  }
+  #tabbrowser-tabbox[sidebar-positionend] {
+    margin-inline-end: var(--uc-tcr-collapsed-width) !important;
+  }
+
+  /* the native launcher (and native vertical tabs) and the resize handle */
+  #sidebar-container,
+  #sidebar-launcher-splitter,
+  #sidebar-splitter {
+    display: none !important;
+  }
 }
 
-/* needed to increase specifity, remove sidebar gap when in fullscreen */
-#main-window[inFullscreen][inDOMFullscreen]:has(
-        #sidebar-box[sidebarcommand*="tabcenter"]:not([hidden])
-    )
-    #browser
-    #tabbrowser-tabbox {
-    margin-left: 0px !important;
+/* the sidebar floats over the page and grows while in use */
+#sidebar-box[sidebarcommand*="tabcenter"] {
+  position: absolute !important;
+  inset-block: 0 !important;
+  inset-inline: 0 auto !important;
+  z-index: 3 !important;
+  overflow: clip !important;
+
+  width: var(--uc-tcr-expanded-width) !important;
+  min-width: var(--uc-tcr-collapsed-width) !important;
+  max-width: var(--uc-tcr-collapsed-width) !important;
+  /* Firefox pads a panel that has no launcher next to it (inline style) */
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+
+  &[sidebar-positionend] {
+    inset-inline: auto 0 !important;
+  }
+
+  /* mouse only: the extension page is a document of its own, so the box
+     never matches :focus-within while the sidebar has the keyboard focus */
+  &:hover {
+    max-width: var(--uc-tcr-expanded-width) !important;
+  }
+
+  /* the extension has no use for a title and close button:
+     #sidebar-header (sidebar.revamp off), #sidebar-panel-header (on) */
+  > :is(#sidebar-header, #sidebar-panel-header) {
+    display: none !important;
+  }
+
+  #sidebar {
+    border-radius: 0 !important;
+    outline: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #sidebar-box[sidebarcommand*="tabcenter"] {
+    transition: max-width 200ms ease !important;
+
+    &:hover {
+      transition-delay: var(--uc-tcr-expand-delay) !important;
+    }
+  }
 }

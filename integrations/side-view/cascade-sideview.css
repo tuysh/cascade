@@ -1,33 +1,34 @@
+/* Side View: Firefox's native split view (right click a tab > Add Split
+   View) does this without an extension, and Cascade styles it.
+
+   Install: copy this file to chrome/includes/ and add
+     @import "includes/cascade-sideview.css";
+   as the last import of userChrome.css. */
+
 #sidebar-box[sidebarcommand*="side-view"] {
   max-width: 50vw !important;
-}
 
-[sidebarcommand*="side-view"] #sidebar {
-  width: 100% !important;
-  max-width: 50vw !important;
-  height: 100% !important;
-}
+  #sidebar {
+    max-width: 50vw !important;
+  }
 
-#sidebar-box[sidebarcommand*="side-view"] #sidebar-header {
-  display: flex !important;
-  flex-direction: row-reverse !important;
+  /* sidebar.revamp off only: Firefox hides #sidebar-header (and does not
+     wire up its close button) when the revamped sidebar is on; the
+     revamped panel header already has a working close button */
+  > #sidebar-header:not([hidden]) {
+    flex-direction: row-reverse !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background-color: var(--toolbox-background-color) !important;
 
-  margin: 0 !important;
-  padding: 0 !important;
+    > :not(#sidebar-close) {
+      display: none !important;
+    }
 
-  background-color: var(--toolbox-background-color) !important;
-  border: none;
-}
-
-#sidebar-box[sidebarcommand*="side-view"]
-  #sidebar-header
-  > *:not(#sidebar-close) {
-  display: none !important;
-}
-
-#sidebar-box[sidebarcommand*="side-view"] #sidebar-header #sidebar-close,
-#sidebar-box[sidebarcommand*="side-view"] #sidebar-header .close-icon {
-  width: 100% !important;
-
-  background: transparent !important;
+    > #sidebar-close {
+      width: 100% !important;
+      background: transparent !important;
+    }
+  }
 }

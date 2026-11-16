@@ -1,51 +1,96 @@
-:root {
-  /* These colours are (mainly) used by the
-     Container Tabs Plugin */
-  --uc-identity-colour-blue: #7ed6df;
-  --uc-identity-colour-turquoise: #55e6c1;
-  --uc-identity-colour-green: #b8e994;
-  --uc-identity-colour-yellow: #f7d794;
-  --uc-identity-colour-orange: #f19066;
-  --uc-identity-colour-red: #fc5c65;
-  --uc-identity-colour-pink: #f78fb3;
-  --uc-identity-colour-purple: #786fa6;
+/* Tab Center Reborn's own stylesheet: paste it into Tab Center Reborn's
+   settings (custom stylesheet). It runs inside the extension, so it cannot
+   see Cascade's palette: the two blocks below are a copy of
+   chrome/includes/cascade-colours.css. Using a colour integration? Paste
+   its two blocks here instead. */
 
-  /*  Cascades main Colour Scheme */
-  --uc-base-colour: #1e2021;
-  --uc-highlight-colour: #2e3133;
-  --uc-inverted-colour: #fafafc;
-  --uc-muted-colour: #aaaaac;
-  --uc-accent-colour: var(--uc-identity-colour-purple);
-  --uc-shadow-colour: #000000;
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* These colours are (mainly) used by the
+     Container Tabs Plugin */
+    --uc-identity-colour-blue: #7ed6df;
+    --uc-identity-colour-turquoise: #55e6c1;
+    --uc-identity-colour-green: #b8e994;
+    --uc-identity-colour-yellow: #f7d794;
+    --uc-identity-colour-orange: #f19066;
+    --uc-identity-colour-red: #fc5c65;
+    --uc-identity-colour-pink: #f78fb3;
+    --uc-identity-colour-purple: #a098cd;
+
+    /*  Cascades main Colour Scheme */
+    --uc-base-colour: #1e2021;
+    --uc-highlight-colour: #2e3133;
+    --uc-inverted-colour: #fafafc;
+    --uc-muted-colour: #aaaaac;
+    --uc-accent-colour: var(--uc-identity-colour-purple);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    /* These colours are (mainly) used by the
+     Container Tabs Plugin */
+    --uc-identity-colour-blue: #1d65f5;
+    --uc-identity-colour-turquoise: #13798c;
+    --uc-identity-colour-green: #2f7d20;
+    --uc-identity-colour-yellow: #936c00;
+    --uc-identity-colour-orange: #ba5100;
+    --uc-identity-colour-red: #d02f3c;
+    --uc-identity-colour-pink: #b8338f;
+    --uc-identity-colour-purple: #822fee;
+
+    /*  Cascades main Colour Scheme */
+    --uc-base-colour: #fafafc;
+    --uc-highlight-colour: #dadadc;
+    --uc-inverted-colour: #1e2021;
+    --uc-muted-colour: #55575b;
+    --uc-accent-colour: var(--uc-identity-colour-purple);
+  }
+}
+
+:root {
+  --uc-shadow-colour: #000000; /* only used as a mask */
+}
+
+body,
+#tablist-wrapper,
+#pinnedtablist {
+  background: var(--uc-base-colour);
+  color: var(--uc-inverted-colour);
 }
 
 #topmenu {
   display: none !important;
 }
 
-#tablist-wrapper,
-#pinnedtablist {
-  background: var(--uc-base-colour);
+/* hover half way to the highlight, so it does not look like the active
+   tab, which also gets the accent coloured line */
+.tab:hover:not(.active) {
+  background: color-mix(in srgb, var(--uc-highlight-colour) 50%, var(--uc-base-colour));
 }
-
-.tab:hover,
 .tab.active {
   background: var(--uc-highlight-colour);
+  box-shadow: inset 2px 0 var(--uc-accent-colour);
 }
 
 #tablist-wrapper .tab-title-wrapper {
   opacity: 0;
   transform: translateX(-10px);
-
-  transition: all 200ms ease;
-  transition-delay: 0ms;
 }
 
 body:hover #tablist-wrapper .tab-title-wrapper {
   opacity: 1;
   transform: translateX(0);
+}
 
-  transition-delay: 50ms;
+@media (prefers-reduced-motion: no-preference) {
+  #tablist-wrapper .tab-title-wrapper {
+    transition: opacity 200ms ease, transform 200ms ease;
+    transition-delay: 0ms;
+  }
+  body:hover #tablist-wrapper .tab-title-wrapper {
+    transition-delay: 50ms;
+  }
 }
 
 .tab,
@@ -94,7 +139,8 @@ body:hover #tablist-wrapper .tab-title-wrapper {
 [data-identity-color="blue"] {
   --identity-color: var(--uc-identity-colour-blue);
 }
-[data-identity-color="turquoise"] {
+[data-identity-color="turquoise"],
+[data-identity-color="cyan"] {
   --identity-color: var(--uc-identity-colour-turquoise);
 }
 [data-identity-color="green"] {
@@ -114,6 +160,13 @@ body:hover #tablist-wrapper .tab-title-wrapper {
 }
 [data-identity-color="purple"] {
   --identity-color: var(--uc-identity-colour-purple);
+}
+[data-identity-color="violet"] {
+  --identity-color: var(--uc-identity-colour-violet, var(--uc-identity-colour-purple));
+}
+[data-identity-color="gray"],
+[data-identity-color="toolbar"] {
+  --identity-color: var(--uc-identity-colour-gray, var(--uc-muted-colour));
 }
 
 .can-scroll-top #tablist {

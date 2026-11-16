@@ -103,7 +103,7 @@ problema visto desde áreas distintas. Orden = prioridad.
 | B12 | Accesibilidad extra: opacidad inactiva vs contraste, forced-colors, reduced-motion | palettes-14, palettes-15, palettes-18, product-20 | hecho salvo palettes-14 (etiquetas atenuadas con el color muted en vez de opacidad) y palettes-18 (va en B15) |
 | B13 | Menú (Alt), arrastre de ventana | oneline-07, product-13, oneline-09 | hecho salvo oneline-09 (refutado por un verificador) |
 | B14 | Configuración: defaults :where para todas las opciones, restos obsoletos del config de ratón, nombres, comentarios, .editorconfig | config-05, config-06, config-10, config-13, config-16, config-17, config-21, tabs-17 | hecho salvo config-13 (renombrar opciones con fallbacks), config-17 (CI) y config-21; probado con config por defecto, de ratón, viejo y vacío |
-| B15 | Integraciones de extensiones (Tab Center Reborn, Side View) | extensions-01..13, config-15 | pendiente |
+| B15 | Integraciones de extensiones (Tab Center Reborn, Side View) | extensions-01..13, config-15 | hecho (reescrituras verificadas por el auditor; 0 píxeles de diferencia en ventanas sin la extensión) salvo extensions-11 (expandir con teclado, no es posible desde userChrome) |
 | B16 | Documentación: README, contributing, plantillas | config-18, config-19, config-20 | pendiente |
 
 ## Cambios hechos
@@ -206,3 +206,10 @@ problema visto desde áreas distintas. Orden = prioridad.
   config nuevo. Borra también, si los tienes, `#pageActionButton {display:none}`,
   `.urlbar-page-action > image {margin-top…}` y `#alltabs-button {margin-top:5px}`.
 - `cascade-responsive-windows-fix.css` ya no hace falta en Windows.
+- **B15** `fix(integrations)`: Tab Center Reborn: ya no oculta la cabecera de todos
+  los paneles laterales, respeta »barra lateral a la derecha« y RTL, sin el hueco de
+  7px, sin selectores muertos, retardo al expandir y `prefers-reduced-motion`,
+  opciones `--uc-tcr-*`; su hoja interna tiene paleta clara y oscura (la actual),
+  color de texto, hover distinto de la activa con línea de acento, contenedores
+  cyan/violet/gray. Side View: la cabecera solo se toca cuando Firefox la muestra.
+  Notas de instalación en cada archivo y referencia a las alternativas nativas.
