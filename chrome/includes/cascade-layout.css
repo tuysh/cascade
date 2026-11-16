@@ -98,6 +98,15 @@
     padding: 0 var(--uc-content-margin) var(--uc-content-margin) !important;
   }
 
+  /* split view panels already bring 4px of margin of their own */
+  #tabbrowser-tabbox:has(> #tabbrowser-tabpanels[splitview]) {
+    padding-inline: max(0px, calc(var(--uc-content-margin) - 4px)) !important;
+    padding-block-end: max(
+      0px,
+      calc(var(--uc-content-margin) - 4px)
+    ) !important;
+  }
+
   #tabbrowser-tabpanels .browserContainer {
     border-radius: var(--uc-content-border-radius) !important;
     overflow: clip !important;
