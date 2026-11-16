@@ -27,6 +27,12 @@
   --chrome-content-separator-color: transparent !important;
 }
 
+/* buttons inside the URL Bar (search engine switcher, »Switch to Tab«)
+   are pills by default; give them the radius of the other boxes in it */
+#urlbar {
+  --button-border-radius: var(--urlbar-inner-border-radius) !important;
+}
+
 #toolbar-menubar {
   &[autohide] {
     &[inactive]:not([customizing]) {
