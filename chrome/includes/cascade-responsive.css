@@ -31,7 +31,8 @@
     width: calc(100vw - var(--uc-urlbar-min-width) - 1px);
   }
 
-  #navigator-toolbox:focus-within {
+  /* grow while the URL Bar is in use */
+  #navigator-toolbox:has(#urlbar:is(:focus-within, [open])) {
     #nav-bar {
       width: var(--uc-urlbar-max-width);
     }
