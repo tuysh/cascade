@@ -13,8 +13,13 @@
     }
   }
 
+  /* Let the URL Bar shrink instead of pushing the buttons next to it
+   * out of the Navigation Bar. Once it reaches its min-width Firefox
+   * moves the buttons into the overflow menu (») by itself.
+   */
   #nav-bar #urlbar-container {
-    min-width: 0px !important;
+    flex-shrink: 1 !important;
+    min-width: clamp(100px, 35%, 275px) !important;
     width: auto !important;
   }
 
