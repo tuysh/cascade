@@ -67,14 +67,19 @@
   }
 }
 
-/* selected tab colour fix */
-.tabbrowser-tab[selected]:not([multiselected]) .tab-background {
-  background: var(--uc-highlight-colour) !important;
-  outline: none !important;
-}
+/* tab shape */
 .tab-background {
-  margin: 0px !important;
-  border-radius: 0px !important;
+  margin-block: var(--uc-tab-margin) !important;
+  margin-inline: 0px !important;
+  border-radius: var(--uc-tab-border-radius) !important;
+}
+
+/* active tab */
+.tabbrowser-tab[selected] .tab-background {
+  background: var(--uc-highlight-colour) !important;
+}
+.tabbrowser-tab[selected]:not([multiselected]) .tab-background {
+  outline: none !important;
 }
 
 /* tab group labels */
