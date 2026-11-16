@@ -15,16 +15,23 @@ digno de usarse a diario. Si una sesión se corta, **retomar desde "Siguiente pa
 |---|------|--------|
 | 1 | Preparar entorno: Firefox 160 real + fuentes de su chrome + arnés de capturas | hecho |
 | 2 | Capturas "antes" (37 escenarios) | hecho |
-| 3 | Auditoría con agentes (9 áreas) + verificación adversarial de cada hallazgo | en curso |
+| 3 | Auditoría con agentes (9 áreas) + verificación adversarial de cada hallazgo | hecho (146 hallazgos; 51 verificados por 2 agentes, el resto se verifica al implementar en Firefox real) |
 | 4 | Implementar los hallazgos confirmados en commits pequeños | pendiente |
 | 5 | Capturas "después" y comparación con "antes" | pendiente |
 | 6 | Revisión independiente del diff final | pendiente |
 
 ## Siguiente paso
 
-Esperar/recoger los resultados de la auditoría (fase 3) y apuntarlos abajo en
-"Hallazgos verificados". Si los resultados se perdieron, relanzar la auditoría por
-áreas (ver "Cómo se audita").
+Implementar los bloques de "Plan de implementación" en orden, marcando cada uno
+como hecho (con su commit) al terminarlo. El detalle completo de cada hallazgo
+(problema, evidencia con archivo:línea de Firefox 160, arreglo propuesto y, si lo
+hay, el veredicto de los verificadores y un `better_fix`) está en
+`docs/audit/findings.json`, buscando por su id (p. ej. `tabs-01`).
+
+Para cada bloque: leer los hallazgos del bloque en el JSON, aplicar el arreglo
+(preferir `fixreview.better_fix` si existe), comprobar en Firefox real con el arnés
+(escenarios afectados + `getComputedStyle`), commit pequeño, actualizar este archivo
+y `git push`.
 
 ## Entorno para retomar
 
@@ -75,9 +82,29 @@ cualquier declaración de autor de la misma propiedad, sin importar la especific
 - Las integraciones de color son copias completas de `cascade-colours.css`: cada
   cambio en el mapeo hay que copiarlo 8 veces.
 
-## Hallazgos verificados
+## Plan de implementación
 
-_(pendiente de la fase 3)_
+Ids de `docs/audit/findings.json`. Los ids en el mismo bloque describen el mismo
+problema visto desde áreas distintas. Orden = prioridad.
+
+| Bloque | Qué | Ids | Estado |
+|---|---|---|---|
+| B1 | Separar paleta y mapeo de colores (integraciones = solo paleta, compatibles hacia atrás) | config-03, colours-18, urlbar-09, palettes-20 | pendiente |
+| B2 | Privacidad: no ocultar los indicadores de cámara/micrófono/pantalla/ubicación | urlbar-01, config-01, product-10 | pendiente |
+| B3 | Foco de teclado: anillos visibles y en color de acento (barra de URL, pestaña activa, botones), sin atenuar lo enfocado | urlbar-02, palettes-01, tabs-01, palettes-02, palettes-03, urlbar-06, product-05, palettes-04, colours-01, product-06 | pendiente |
+| B4 | Paletas: Ayu, por defecto (muted claro), Catppuccin, Rosé Pine, Nord, Gruvbox; highlight ≈ base | palettes-05..11, urlbar-07, colours-16, product-08 | pendiente |
+| B5 | Pestañas verticales: márgenes, anchos adaptativos, iconos centrados al plegar, hover ≠ activa | tabs-02, tabs-03, product-02, tabs-14, palettes-16, product-07 | pendiente |
+| B6 | Layout de una línea: animación al redimensionar (@property), ventana nueva con URL enfocada, modo personalizar, código muerto, salto de 20px al crecer | oneline-01, oneline-03, oneline-04, config-09, oneline-06, oneline-08, product-01 | pendiente |
+| B7 | Quitar/neutralizar cascade-responsive-windows-fix.css (obsoleto en FF160) | oneline-02, oneline-05, config-14, extensions-02 | pendiente |
+| B8 | Pestañas: grupos (selector roto), botones de cerrar, sonido en fijadas, línea de acento en fijadas, vista dividida, ancho adaptativo, botón nueva pestaña como opción, radios, arrastre, alturas por densidad | tabs-04..13, tabs-15..20, config-02, config-07, config-08, product-04, product-11, product-12, tabs-09 | pendiente |
+| B9 | Barra de URL: fila seleccionada visible, colores de selección de texto, #pageActionButton, contraste de URLs/enlaces, botón de menú de 1px, hover en cajas, radios | urlbar-03..05, urlbar-08, urlbar-10..16, colours-10, colours-15, palettes-13, product-03, palettes-11, config-11, config-12, palettes-19, product-09, product-17 | pendiente |
+| B10 | Colores: <select> de páginas ilegibles, fondo cuadrado de menús, degradado Nova, tinte violeta Nova, contenedores violet/gray, barras de notificación, panel de confianza, autocompletado, tooltips, privada, temas ligeros, botón primario contrast-color() | colours-02..09, colours-11..14, colours-17, palettes-12, product-18, product-19 | pendiente |
+| B11 | Página/ventana: panel de estado espejo, hueco en vista dividida, diálogos modales, contorno de página en modo claro, controles de ventana como opción, barra de búsqueda, decoración de vista dividida | content-01..09, palettes-17, product-14, config-04, product-16 | pendiente |
+| B12 | Accesibilidad extra: opacidad inactiva vs contraste, forced-colors, reduced-motion | palettes-14, palettes-15, palettes-18, product-20 | pendiente |
+| B13 | Menú (Alt), arrastre de ventana | oneline-07, product-13, oneline-09 | pendiente |
+| B14 | Configuración: defaults :where para todas las opciones, restos obsoletos del config de ratón, nombres, comentarios, .editorconfig | config-05, config-06, config-10, config-13, config-16, config-17, config-21, tabs-17 | pendiente |
+| B15 | Integraciones de extensiones (Tab Center Reborn, Side View) | extensions-01..13, config-15 | pendiente |
+| B16 | Documentación: README, contributing, plantillas | config-18, config-19, config-20 | pendiente |
 
 ## Cambios hechos
 
