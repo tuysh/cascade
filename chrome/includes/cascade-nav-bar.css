@@ -17,8 +17,10 @@
   background: transparent !important;
 }
 
-#urlbar,
-#urlbar * {
+/* no focus border and no shadow around the URL Bar and its results;
+   the focus rings of the buttons inside of it stay */
+.urlbar > :is(.urlbar-background, .urlbar-input-container),
+.urlbar > .urlbarView > .urlbarView-background {
   outline: none !important;
   box-shadow: none !important;
 }
@@ -35,12 +37,18 @@
   ) !important;
 }
 
-/* dim the toolbar buttons until they are hovered or in use */
-#nav-bar .toolbarbutton-1 > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
-  transition: opacity 150ms ease;
-}
-#nav-bar
-  .toolbarbutton-1:not(:hover, [open], [checked], [disabled])
-  > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
-  opacity: var(--uc-inactive-opacity) !important;
+/* dim the toolbar buttons until they are hovered, focused or in use;
+   badges, download progress and buttons asking for attention stay bright */
+#nav-bar .toolbarbutton-1 {
+  > .toolbarbutton-icon,
+  > .toolbarbutton-badge-stack > :not(.toolbarbutton-badge) {
+    transition: opacity 150ms ease;
+  }
+
+  &:not(:hover, :focus-visible, [open], [checked], [disabled], [attention], [progress]) {
+    > .toolbarbutton-icon,
+    > .toolbarbutton-badge-stack > :not(.toolbarbutton-badge) {
+      opacity: var(--uc-inactive-opacity) !important;
+    }
+  }
 }

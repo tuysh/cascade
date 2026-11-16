@@ -104,15 +104,30 @@ tab-split-view-wrapper .tab-background {
       var(--uc-active-tab-line) no-repeat,
     var(--uc-highlight-colour) !important;
 }
-.tabbrowser-tab[selected]:not([multiselected]) .tab-background {
-  outline: none !important;
+/* no outline around the active tab, but keep Firefox's keyboard focus
+   ring (Ctrl+Arrow / Tab into the tab strip), in the accent colour */
+.tabbrowser-tab[selected]:not([multiselected]) > .tab-stack > .tab-background {
+  outline-color: transparent !important;
+}
+#tabbrowser-tabs[tablist-has-focus]
+  :is(
+    .tabbrowser-tab.tablist-keyboard-focus > .tab-stack > .tab-background,
+    .tab-group-label.tablist-keyboard-focus
+  ) {
+  outline-color: var(--focus-outline-color) !important;
 }
 
 /* dim the tabs that are not in use */
 .tab-content {
   transition: opacity 150ms ease;
 }
-.tabbrowser-tab:not([selected], [multiselected], :hover) .tab-content {
+.tabbrowser-tab:not(
+    [selected],
+    [multiselected],
+    :hover,
+    #tabbrowser-tabs[tablist-has-focus] .tablist-keyboard-focus
+  )
+  .tab-content {
   opacity: var(--uc-inactive-opacity) !important;
 }
 

@@ -70,11 +70,51 @@
   /* sidebar */
   --sidebar-background-color: var(--uc-base-colour) !important;
   --sidebar-text-color: var(--uc-inverted-colour) !important;
+
+  /* Firefox's own accent: links, checkboxes, primary buttons, the starred
+     bookmark, the loading throbber and the attention dot follow these */
+  --color-accent-primary: var(--uc-accent-colour) !important;
+  --color-accent-primary-hover: color-mix(
+    in srgb,
+    var(--uc-inverted-colour) 15%,
+    var(--uc-accent-colour)
+  ) !important;
+  --color-accent-primary-active: color-mix(
+    in srgb,
+    var(--uc-inverted-colour) 25%,
+    var(--uc-accent-colour)
+  ) !important;
+  --link-color: var(--uc-accent-text-colour) !important;
+  --toolbarbutton-icon-fill-attention: var(--uc-accent-text-colour) !important;
+  --tab-icon-fill-loading: var(--uc-accent-colour) !important;
+  --tab-attention-dot-color: var(--uc-accent-colour) !important;
+}
+
+/* The accent, made light enough (dark schemes) or dark enough (light
+   schemes) to be read as text and to stand out as a focus ring, whatever
+   the palette. Only the lightness changes, so the hue stays recognisable. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --uc-accent-text-colour: oklch(from var(--uc-accent-colour) max(l, 0.75) c h);
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --uc-accent-text-colour: oklch(from var(--uc-accent-colour) min(l, 0.5) c h);
+  }
+}
+
+/* keyboard focus rings; Firefox resolves --focus-outline on :root, so the
+   colour has to be set there. High contrast mode keeps its own colour. */
+@media not (forced-colors) {
+  :root {
+    --focus-outline-color: var(--uc-accent-text-colour) !important;
+  }
 }
 
 /* URLs inside the URL bar results */
 .urlbarView-url {
-  color: var(--uc-accent-colour) !important;
+  color: var(--uc-accent-text-colour) !important;
 }
 
 /* Container Tabs */

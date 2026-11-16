@@ -91,7 +91,7 @@ problema visto desde áreas distintas. Orden = prioridad.
 |---|---|---|---|
 | B1 | Separar paleta y mapeo de colores (integraciones = solo paleta, compatibles hacia atrás) | config-03, colours-18, urlbar-09, palettes-20 | hecho: mapeo en `cascade-colours-mapping.css`; 0 píxeles de diferencia, también con un userChrome.css viejo y con una integración vieja de copia completa |
 | B2 | Privacidad: no ocultar los indicadores de cámara/micrófono/pantalla/ubicación | urlbar-01, config-01, product-10 | hecho: verificado en FF160 (icono de cámara visible al compartir) |
-| B3 | Foco de teclado: anillos visibles y en color de acento (barra de URL, pestaña activa, botones), sin atenuar lo enfocado | urlbar-02, palettes-01, tabs-01, palettes-02, palettes-03, urlbar-06, product-05, palettes-04, colours-01, product-06 | pendiente |
+| B3 | Foco de teclado: anillos visibles y en color de acento (barra de URL, pestaña activa, botones), sin atenuar lo enfocado | urlbar-02, palettes-01, tabs-01, palettes-02, palettes-03, urlbar-06, product-05, palettes-04, colours-01, product-06 | hecho: verificado en FF160 (anillos en pestaña activa, pestaña con Ctrl+→, estrella; vista dividida y buscador lateral en acento) |
 | B4 | Paletas: Ayu, por defecto (muted claro), Catppuccin, Rosé Pine, Nord, Gruvbox; highlight ≈ base | palettes-05..11, urlbar-07, colours-16, product-08 | pendiente |
 | B5 | Pestañas verticales: márgenes, anchos adaptativos, iconos centrados al plegar, hover ≠ activa | tabs-02, tabs-03, product-02, tabs-14, palettes-16, product-07 | pendiente |
 | B6 | Layout de una línea: animación al redimensionar (@property), ventana nueva con URL enfocada, modo personalizar, código muerto, salto de 20px al crecer | oneline-01, oneline-03, oneline-04, config-09, oneline-06, oneline-08, product-01 | pendiente |
@@ -118,3 +118,10 @@ problema visto desde áreas distintas. Orden = prioridad.
 - **B2** `fix(config)`: ya no se ocultan los indicadores rojos de cámara, micrófono,
   pantalla y ubicación en la barra de URL (solo el icono de "permisos concedidos" y
   los de permisos bloqueados, como antes).
+- **B3** `fix(a11y)`: anillos de foco de teclado visibles en la barra de URL (antes
+  `#urlbar *` los quitaba todos) y en la pestaña activa; lo enfocado ya no se atenúa;
+  badges, progreso de descargas y botones con `[attention]` tampoco. El acento de
+  Firefox (`--color-accent-primary`, enlaces, estrella, throbber, punto de atención,
+  anillos de foco) sigue la paleta. Nuevo `--uc-accent-text-colour` (acento con la
+  luminosidad ajustada en oklch para que se lea como texto en cualquier paleta) y
+  texto de botones primarios con `contrast-color()`.

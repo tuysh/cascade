@@ -20,6 +20,16 @@ panel {
   --panel-footer-background-color: var(--uc-highlight-colour) !important;
   --popup-background-color: var(--uc-base-colour) !important;
   --popup-border-color: var(--uc-panel-border-colour) !important;
+
+  /* text on primary buttons (»Translate«, »Allow«, …): black or white,
+     whichever reads better on the accent, the same in every state so the
+     label does not change colour on hover */
+  --uc-primary-text-colour: contrast-color(var(--uc-accent-colour));
+  --button-text-color-primary: var(--uc-primary-text-colour) !important;
+  --button-text-color-primary-hover: var(--uc-primary-text-colour) !important;
+  --button-text-color-primary-active: var(--uc-primary-text-colour) !important;
+  --button-text-color-primary-disabled: var(--uc-primary-text-colour) !important;
+  --button-background-color-primary-disabled: var(--uc-accent-colour) !important;
 }
 
 /* Firefox resolves its button tokens on :root, so the ones derived from
@@ -31,8 +41,7 @@ panel {
   --background-color-box: var(--uc-highlight-colour) !important;
 
   --color-accent-primary: var(--uc-accent-colour) !important;
-  --focus-outline-color: var(--uc-accent-colour) !important;
-  --link-color: var(--uc-accent-colour) !important;
+  --link-color: var(--uc-accent-text-colour) !important;
 
   /* regular buttons */
   --uc-panel-button-hover-colour: color-mix(
@@ -78,9 +87,6 @@ panel {
   --button-background-color-primary-active: var(
     --uc-panel-primary-hover-colour
   ) !important;
-  --button-text-color-primary: var(--uc-base-colour) !important;
-  --button-text-color-primary-hover: var(--uc-base-colour) !important;
-  --button-text-color-primary-active: var(--uc-base-colour) !important;
 }
 
 /* banners at the top of the app menu (update available, add-on notices);
