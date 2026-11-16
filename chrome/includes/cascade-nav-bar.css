@@ -24,8 +24,3 @@
 .urlbarView-row[selected] > .urlbarView-row-inner {
   background: var(--uc-highlight-colour) !important;
 }
-
-.urlbar-icon,
-.urlbar-go-button {
-  margin: auto;
-}
