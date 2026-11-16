@@ -18,13 +18,22 @@ Besides the creation and maintenance of ports we appreciate all sorts of code an
 
 The following is a set of guidelines for contributing to this project. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
-- PRs should go to the `dev` branch. Reasons:
-  - If there is already stuff under development, then it's likely that a conflict may occur.
-  - Documentation tends not to be updated by PRs.
-  - Testing.
-- Use the `.editorconfig` file (located at the root of this project) on your editor so as to "maintain consistent coding styles". For instructions on how to use this file refer to [EditorConfig's website](https://editorconfig.org/).
+- PRs go to `main`. Keep them focused, with commit messages in the conventional
+  commits style used by the history (`fix(tabs): …`, `feat(nav-bar): …`).
+- Use the `.editorconfig` file at the root of this project in your editor, so as to
+  "maintain consistent coding styles" ([EditorConfig](https://editorconfig.org/)).
+- A new option is a `--uc-*` custom property declared, with a comment, in both
+  `cascade-config.css` and `cascade-config-mouse.css`, plus a `:where(:root)` default
+  in the include that reads it, so older config files keep working.
+- Colours come from the palette (`--uc-*-colour`); never hard-code one in an include.
+- `userChrome.css` is a user stylesheet: a declaration without `!important` loses to
+  any of Firefox's own declarations for the same property, whatever its specificity.
+- Test with the current Firefox release: Nova on and off (`browser.nova.enabled`),
+  compact / normal / touch density, vertical tabs (`sidebar.verticalTabs`), light and
+  dark, and both config files. Add before / after screenshots to the PR.
+  `tools/firefox-harness/` can take them for you in the real browser.
 
-> When contributing to this project, you must agree that you have authored 100% of the content, (or) that you have the necessary rights to the content and that the content you contribute may be provided under the [projects MIT license](https://github.com/andreasgrafen/cascade/blob/main/LICENSE).
+> When contributing to this project, you must agree that you have authored 100% of the content, (or) that you have the necessary rights to the content and that the content you contribute may be provided under the [projects MIT license](LICENSE).
 
 &nbsp;
 
