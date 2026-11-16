@@ -88,9 +88,11 @@
 }
 
 /* never draw a button that no longer fits over the tabs; not while the
- * results are open, their background reaches past the URL Bar (and the
- * bar is at its widest then, so nothing can spill)
+ * results of the URL Bar or the search bar are open, their background
+ * reaches past the bar (and the URL Bar is at its widest then, so nothing
+ * can spill)
  */
-#navigator-toolbox:not(:has(#urlbar[open])) #nav-bar-customization-target {
+#navigator-toolbox:not(:has(.urlbar:is([open], [popover-open])))
+  #nav-bar-customization-target {
   overflow-x: clip;
 }

@@ -104,13 +104,13 @@
   --uc-urlbar-colour: var(--uc-highlight-colour);
   --uc-urlbar-selection-colour: var(--uc-base-colour);
 
-  /*  Background of the URL Bar in private windows
+  /*  Background of the URL Bar in private windows: the URL Bar
+   *  colour turned violet, as light or dark as before so the text
+   *  stays readable
    *  var(--uc-urlbar-colour) makes them look like the others
    */
-  --uc-private-urlbar-colour: color-mix(
-    in srgb,
-    var(--uc-identity-colour-purple) 25%,
-    var(--uc-highlight-colour)
+  --uc-private-urlbar-colour: oklch(
+    from var(--uc-urlbar-colour) l max(c, 0.05) 300
   );
 }
 
@@ -157,8 +157,7 @@
 /* Hides the New Tab buttons next to the tabs (Ctrl+T, or a double click
    on the empty tab bar still open one); the one at the end of an
    overflowing tab bar stays */
-/* #tabs-newtab-button,
-#vertical-tabs-newtab-button { display: none !important; } */
+/* #tabs-newtab-button { display: none !important; } */
 
 /*---+---+---+---+---+---+---+
  | T | A | B | — | B | A | R |

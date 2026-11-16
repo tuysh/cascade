@@ -29,13 +29,20 @@
   border-color: transparent !important;
 }
 
+/* the camera, microphone, screen and location indicators show while a
+   site is using them, even with a config file from an older version of
+   Cascade, which hid the whole box they live in */
+#identity-box > #identity-permission-box[hasSharingIcon] {
+  display: flex !important;
+}
+
 /* mark the result Enter opens with an accent coloured line, like the
    active tab, so it shows whatever the two URL Bar colours are and it
    does not look like a hovered result */
 .urlbarView-row[selected] {
   background-image: linear-gradient(
-    var(--uc-accent-colour),
-    var(--uc-accent-colour)
+    var(--uc-accent-text-colour),
+    var(--uc-accent-text-colour)
   ) !important;
   background-repeat: no-repeat !important;
   background-origin: content-box !important;

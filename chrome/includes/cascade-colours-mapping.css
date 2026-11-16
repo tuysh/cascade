@@ -12,10 +12,8 @@
   --uc-urlbar-selection-colour: var(--uc-base-colour);
 
   /* the URL Bar of private windows, see cascade-config.css */
-  --uc-private-urlbar-colour: color-mix(
-    in srgb,
-    var(--uc-identity-colour-purple) 25%,
-    var(--uc-highlight-colour)
+  --uc-private-urlbar-colour: oklch(
+    from var(--uc-urlbar-colour) l max(c, 0.05) 300
   );
 
   /* container colours added after some palettes were written */
@@ -24,6 +22,13 @@
 }
 
 :root {
+  /* borders of panels, menus, tooltips and the status panel */
+  --uc-panel-border-colour: color-mix(
+    in srgb,
+    var(--uc-inverted-colour) 12%,
+    var(--uc-base-colour)
+  );
+
   /* window frame (the area behind the tabs) */
   --toolbox-background-color: var(--uc-base-colour) !important;
   --toolbox-background-color-inactive: var(--uc-base-colour) !important;
@@ -94,7 +99,6 @@
   --urlbarview-text-color-selected: var(--uc-inverted-colour) !important;
   --urlbarview-text-color-action: var(--uc-muted-colour) !important;
   --urlbarview-separator-color: var(--uc-urlbar-selection-colour) !important;
-  --urlbarview-text-color-secondary: var(--uc-muted-colour) !important;
 
   /* sidebar */
   --sidebar-background-color: var(--uc-base-colour) !important;
@@ -117,20 +121,29 @@
   --link-color: var(--uc-accent-text-colour) !important;
   --toolbarbutton-icon-fill-attention: var(--uc-accent-text-colour) !important;
   --tab-icon-fill-loading: var(--uc-accent-colour) !important;
-  --tab-attention-dot-color: var(--uc-accent-colour) !important;
+  --tab-attention-dot-color: var(--uc-accent-text-colour) !important;
 }
 
 /* The accent, made light enough (dark schemes) or dark enough (light
-   schemes) to be read as text and to stand out as a focus ring, whatever
-   the palette. Only the lightness changes, so the hue stays recognisable. */
+   schemes) to be read as text (4.5:1 on the base and highlight colours of
+   every palette), and to stand out as a focus ring or a state marker.
+   Only the lightness changes, so the hue stays recognisable. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --uc-accent-text-colour: oklch(from var(--uc-accent-colour) max(l, 0.75) c h);
+    --uc-accent-text-colour: oklch(from var(--uc-accent-colour) max(l, 0.78) c h);
   }
 }
 @media (prefers-color-scheme: light) {
   :root {
-    --uc-accent-text-colour: oklch(from var(--uc-accent-colour) min(l, 0.5) c h);
+    --uc-accent-text-colour: oklch(from var(--uc-accent-colour) min(l, 0.48) c h);
+  }
+}
+
+/* secondary text of the URL Bar results; when more contrast is asked
+   for, Firefox makes it as strong as the rest */
+@media not (prefers-contrast) {
+  :root {
+    --urlbarview-text-color-secondary: var(--uc-muted-colour) !important;
   }
 }
 
@@ -142,9 +155,11 @@
   }
 }
 
-/* private windows get their own URL Bar colour */
+/* private windows get their own URL Bar colour (not in permanent private
+   browsing mode, where every window is private) */
 :root[privatebrowsingmode="temporary"] {
-  --uc-urlbar-colour: var(--uc-private-urlbar-colour);
+  --toolbar-field-background-color: var(--uc-private-urlbar-colour) !important;
+  --toolbar-field-background-color-focus: var(--uc-private-urlbar-colour) !important;
 }
 
 /* notification bars (»Firefox is not your default browser«, …); warnings
@@ -217,15 +232,28 @@ notification-message.infobar {
 }
 
 /* High contrast mode (forced colours): every palette steps aside for the
-   system colours */
+   system colours. Surfaces are Canvas (or Field for the URL Bar) under
+   CanvasText; SelectedItem only ever sits under SelectedItemText */
 @media (forced-colors) {
   :root {
     --uc-base-colour: Canvas !important;
-    --uc-highlight-colour: SelectedItem !important;
+    --uc-highlight-colour: Canvas !important;
     --uc-inverted-colour: CanvasText !important;
     --uc-muted-colour: GrayText !important;
     --uc-accent-colour: SelectedItem !important;
     --uc-accent-text-colour: CanvasText !important;
+    --uc-urlbar-colour: Field !important;
+    --uc-private-urlbar-colour: Field !important;
+    --toolbar-field-text-color: FieldText !important;
+    --toolbar-field-text-color-focus: FieldText !important;
+    --lwt-toolbar-field-highlight: SelectedItem !important;
+    --lwt-toolbar-field-highlight-text: SelectedItemText !important;
     --tab-text-color-selected: SelectedItemText !important;
+  }
+  #tabbrowser-tabs[orient] .tabbrowser-tab[selected] > .tab-stack > .tab-background,
+  menupopup :is(menuitem, menu)[_moz-menuactive]:not([disabled]),
+  .autocomplete-richlistitem[selected] {
+    background: SelectedItem !important;
+    color: SelectedItemText !important;
   }
 }

@@ -1,7 +1,9 @@
-/* userChrome.css files from before cascade-colours-mapping.css existed do
-   not import it; without it a palette-only cascade-colours.css would leave
-   Firefox's own colours in place. Importing it twice is harmless. */
+/* userChrome.css files from older versions of Cascade do not import
+   these two: without the mapping a palette-only cascade-colours.css would
+   leave Firefox's own colours in place, and menus and panels would not
+   follow the palette. Importing them twice is harmless. */
 @import "cascade-colours-mapping.css";
+@import "cascade-panels.css";
 
 /* Defaults for options that a config file from an older version of
    Cascade does not define yet. :where() has no specificity, so the

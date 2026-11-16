@@ -43,11 +43,16 @@
   }
 }
 /* like Firefox: no close button on background tabs that are too narrow
-   to be clicked safely (tab bar full or overflowing), until hovered */
-#tabbrowser-tabs[closebuttons="activetab"][orient="horizontal"]
-  .tabbrowser-tab:not([selected], :hover)
-  .tab-close-button {
-  display: none !important;
+   to be clicked safely, until hovered. Firefox only measures the first
+   tab (against browser.tabs.tabClipWidth, 140px), which is wider here
+   when it is the active one, so every tab measures itself */
+#tabbrowser-tabs[orient="horizontal"] .tabbrowser-tab:not([pinned]) {
+  container: uc-tab / inline-size;
+}
+@container uc-tab (width < 140px) {
+  .tabbrowser-tab:not([selected], :hover) .tab-close-button {
+    display: none !important;
+  }
 }
 
 /* adaptive tab width; vertical tabs fill the sidebar instead. The tabs
@@ -135,7 +140,7 @@ tab-split-view-wrapper .tab-background {
 }
 #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected] .tab-background {
   background:
-    linear-gradient(var(--uc-accent-colour), var(--uc-accent-colour)) left
+    linear-gradient(var(--uc-accent-text-colour), var(--uc-accent-text-colour)) left
       center / var(--uc-active-tab-line) 50% no-repeat,
     var(--uc-highlight-colour) !important;
 
@@ -147,7 +152,7 @@ tab-split-view-wrapper .tab-background {
   .tabbrowser-tab[selected]
   .tab-background {
   background:
-    linear-gradient(var(--uc-accent-colour), var(--uc-accent-colour)) center
+    linear-gradient(var(--uc-accent-text-colour), var(--uc-accent-text-colour)) center
       bottom / max(16px, calc(100% - 2 * var(--uc-tab-padding)))
       var(--uc-active-tab-line) no-repeat,
     var(--uc-highlight-colour) !important;
@@ -205,9 +210,14 @@ tab-split-view-wrapper .tab-background {
   }
 }
 
-/* tab hover preview: the radius of the other panels */
+/* tab hover preview: the radius of the other panels, square like them
+   where the window manager cannot draw transparent corners */
 #tab-preview-panel {
   --panel-border-radius: var(--uc-border-radius) !important;
+
+  @media (-moz-platform: linux) and (not (-moz-gtk-csd-transparency-available)) {
+    --panel-border-radius: 0px !important;
+  }
 }
 
 /* hide vertical tabs action buttons */

@@ -7,10 +7,10 @@
 :root,
 menupopup:not([customoptionstyling="true"]),
 panel {
-  --uc-panel-border-colour: color-mix(
+  --uc-panel-button-hover-colour: color-mix(
     in srgb,
     var(--uc-inverted-colour) 12%,
-    var(--uc-base-colour)
+    var(--uc-highlight-colour)
   );
 
   --panel-background-color: var(--uc-base-colour) !important;
@@ -20,16 +20,6 @@ panel {
   --panel-footer-background-color: var(--uc-highlight-colour) !important;
   --popup-background-color: var(--uc-base-colour) !important;
   --popup-border-color: var(--uc-panel-border-colour) !important;
-
-  /* text on primary buttons (»Translate«, »Allow«, …): black or white,
-     whichever reads better on the accent, the same in every state so the
-     label does not change colour on hover */
-  --uc-primary-text-colour: contrast-color(var(--uc-accent-colour));
-  --button-text-color-primary: var(--uc-primary-text-colour) !important;
-  --button-text-color-primary-hover: var(--uc-primary-text-colour) !important;
-  --button-text-color-primary-active: var(--uc-primary-text-colour) !important;
-  --button-text-color-primary-disabled: var(--uc-primary-text-colour) !important;
-  --button-background-color-primary-disabled: var(--uc-accent-colour) !important;
 
   /* info cards: sign-in promo and messages in the app menu, the site
      information panel; its warnings stay red */
@@ -44,62 +34,74 @@ panel {
   --trustpanel-card-divider-color: var(--uc-panel-border-colour) !important;
 }
 
-/* Firefox resolves its button tokens on :root, so the ones derived from
-   others (ghost → menu, primary → accent) have to be set one by one.
-   <select> menus a page styled keep its colours */
-menupopup:not([customoptionstyling="true"]),
-panel {
-  --text-color: var(--uc-inverted-colour) !important;
-  --text-color-deemphasized: var(--uc-muted-colour) !important;
-  --background-color-box: var(--uc-highlight-colour) !important;
+/* Buttons. In high contrast mode Firefox's own system colour buttons
+   stay instead */
+@media not (forced-colors) {
+  /* primary buttons (»Translate«, »Allow«, …), also outside of panels:
+     the label is black or white, whichever reads better on the accent,
+     the same in every state so it does not change colour on hover. Hover
+     and active move the accent away from the label, so it reads better,
+     not worse */
+  :root,
+  menupopup:not([customoptionstyling="true"]),
+  panel {
+    --uc-primary-text-colour: contrast-color(var(--uc-accent-colour));
+    --button-text-color-primary: var(--uc-primary-text-colour) !important;
+    --button-text-color-primary-hover: var(--uc-primary-text-colour) !important;
+    --button-text-color-primary-active: var(--uc-primary-text-colour) !important;
+    --button-text-color-primary-disabled: var(--uc-primary-text-colour) !important;
+    --button-background-color-primary: var(--uc-accent-colour) !important;
+    --button-background-color-primary-hover: color-mix(
+      in srgb,
+      contrast-color(var(--uc-primary-text-colour)) 15%,
+      var(--uc-accent-colour)
+    ) !important;
+    --button-background-color-primary-active: color-mix(
+      in srgb,
+      contrast-color(var(--uc-primary-text-colour)) 25%,
+      var(--uc-accent-colour)
+    ) !important;
+    --button-background-color-primary-disabled: var(--uc-accent-colour) !important;
+  }
 
-  --color-accent-primary: var(--uc-accent-colour) !important;
-  --link-color: var(--uc-accent-text-colour) !important;
+  /* Firefox resolves its button tokens on :root, so the ones derived from
+     others (ghost → menu) have to be set one by one.
+     <select> menus a page styled keep its colours */
+  menupopup:not([customoptionstyling="true"]),
+  panel {
+    --text-color: var(--uc-inverted-colour) !important;
+    --text-color-deemphasized: var(--uc-muted-colour) !important;
+    --background-color-box: var(--uc-highlight-colour) !important;
 
-  /* regular buttons */
-  --uc-panel-button-hover-colour: color-mix(
-    in srgb,
-    var(--uc-inverted-colour) 12%,
-    var(--uc-highlight-colour)
-  );
-  --button-background-color: var(--uc-highlight-colour) !important;
-  --button-background-color-hover: var(
-    --uc-panel-button-hover-colour
-  ) !important;
-  --button-background-color-active: var(
-    --uc-panel-button-hover-colour
-  ) !important;
-  --button-text-color: var(--uc-inverted-colour) !important;
-  --button-text-color-hover: var(--uc-inverted-colour) !important;
-  --button-text-color-active: var(--uc-inverted-colour) !important;
+    --color-accent-primary: var(--uc-accent-colour) !important;
+    --link-color: var(--uc-accent-text-colour) !important;
 
-  /* rows of a panel and icon only buttons */
-  --button-background-color-ghost: transparent !important;
-  --button-background-color-ghost-hover: var(--uc-highlight-colour) !important;
-  --button-background-color-ghost-active: var(--uc-highlight-colour) !important;
-  --button-background-color-menu: transparent !important;
-  --button-background-color-menu-hover: var(--uc-highlight-colour) !important;
-  --button-background-color-menu-active: var(--uc-highlight-colour) !important;
-  --button-text-color-ghost: var(--uc-inverted-colour) !important;
-  --button-text-color-ghost-hover: var(--uc-inverted-colour) !important;
-  --button-text-color-ghost-active: var(--uc-inverted-colour) !important;
-  --button-text-color-menu: var(--uc-inverted-colour) !important;
-  --button-text-color-menu-hover: var(--uc-inverted-colour) !important;
-  --button-text-color-menu-active: var(--uc-inverted-colour) !important;
+    /* regular buttons */
+    --button-background-color: var(--uc-highlight-colour) !important;
+    --button-background-color-hover: var(
+      --uc-panel-button-hover-colour
+    ) !important;
+    --button-background-color-active: var(
+      --uc-panel-button-hover-colour
+    ) !important;
+    --button-text-color: var(--uc-inverted-colour) !important;
+    --button-text-color-hover: var(--uc-inverted-colour) !important;
+    --button-text-color-active: var(--uc-inverted-colour) !important;
 
-  /* primary buttons, e.g. »Translate« */
-  --uc-panel-primary-hover-colour: color-mix(
-    in srgb,
-    var(--uc-inverted-colour) 15%,
-    var(--uc-accent-colour)
-  );
-  --button-background-color-primary: var(--uc-accent-colour) !important;
-  --button-background-color-primary-hover: var(
-    --uc-panel-primary-hover-colour
-  ) !important;
-  --button-background-color-primary-active: var(
-    --uc-panel-primary-hover-colour
-  ) !important;
+    /* rows of a panel and icon only buttons */
+    --button-background-color-ghost: transparent !important;
+    --button-background-color-ghost-hover: var(--uc-highlight-colour) !important;
+    --button-background-color-ghost-active: var(--uc-highlight-colour) !important;
+    --button-background-color-menu: transparent !important;
+    --button-background-color-menu-hover: var(--uc-highlight-colour) !important;
+    --button-background-color-menu-active: var(--uc-highlight-colour) !important;
+    --button-text-color-ghost: var(--uc-inverted-colour) !important;
+    --button-text-color-ghost-hover: var(--uc-inverted-colour) !important;
+    --button-text-color-ghost-active: var(--uc-inverted-colour) !important;
+    --button-text-color-menu: var(--uc-inverted-colour) !important;
+    --button-text-color-menu-hover: var(--uc-inverted-colour) !important;
+    --button-text-color-menu-active: var(--uc-inverted-colour) !important;
+  }
 }
 
 /* banners at the top of the app menu (update available, add-on notices);
@@ -131,6 +133,12 @@ tooltip {
   color: var(--uc-inverted-colour) !important;
   border: 1px solid var(--uc-panel-border-colour) !important;
   border-radius: var(--uc-border-radius) !important;
+
+  /* like Firefox: square where the window manager cannot draw
+     transparent corners, which would show black */
+  @media (-moz-platform: linux) and (not (-moz-gtk-csd-transparency-available)) {
+    border-radius: 0 !important;
+  }
 }
 
 menupopup :is(menuitem, menu) {
