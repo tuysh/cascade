@@ -100,18 +100,18 @@
    */
   --uc-urlbar-position: 1;
 
+  /*  Firefox can be a little wonky with the vertical
+   *  URL Bar placement. Change this variable to adapt
+   *  to this when necessary.
+   */
+  --uc-urlbar-top-spacing: 1px;
+
   /*  Background of the URL Bar, and of the things highlighted
    *  inside of it (selected result, hovered icons, labels)
    *  blend into the toolbar (classic Cascade): swap the two colours
    */
   --uc-urlbar-colour: var(--uc-highlight-colour);
   --uc-urlbar-selection-colour: var(--uc-base-colour);
-
-  /*  Firefox can be a little wonky with the vertical
-   *  URL Bar placement. Change this variable to adapt
-   *  to this when necessary.
-   */
-  --uc-urlbar-top-spacing: 1px;
 }
 
 /* Disable the Navigation Buttons */
@@ -163,11 +163,12 @@
   --uc-tab-padding: 14px;
 
   /*  Shape of the tabs
-   *  floating: the Global Border Radius and a few px of margin
+   *  floating: the Global Border Radius, and the margin Firefox uses
+   *  for the current density so tabs are as tall as the URL Bar
    *  square and full height (classic Cascade): set both to 0px
    */
   --uc-tab-border-radius: var(--uc-border-radius);
-  --uc-tab-margin: 4px;
+  --uc-tab-margin: var(--tab-margin-block);
 
   /*  Thickness of the accent coloured line
    *  marking the active tab

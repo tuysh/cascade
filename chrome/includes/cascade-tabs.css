@@ -4,7 +4,7 @@
 :where(:root) {
   --uc-tab-padding: 14px;
   --uc-tab-border-radius: var(--uc-border-radius);
-  --uc-tab-margin: 4px;
+  --uc-tab-margin: var(--tab-margin-block);
   --uc-active-tab-line: 2px;
   --uc-inactive-opacity: 0.65;
 }

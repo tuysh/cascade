@@ -162,11 +162,12 @@
   --uc-tab-padding: 14px;
 
   /*  Shape of the tabs
-   *  floating: the Global Border Radius and a few px of margin
+   *  floating: the Global Border Radius, and the margin Firefox uses
+   *  for the current density so tabs are as tall as the URL Bar
    *  square and full height (classic Cascade): set both to 0px
    */
   --uc-tab-border-radius: var(--uc-border-radius);
-  --uc-tab-margin: 4px;
+  --uc-tab-margin: var(--tab-margin-block);
 
   /*  Thickness of the accent coloured line
    *  marking the active tab
