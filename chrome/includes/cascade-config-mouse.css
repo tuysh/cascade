@@ -27,6 +27,16 @@
   --uc-content-margin: 6px;
   --uc-content-border-radius: var(--uc-border-radius);
 
+  /*  Hairline around the "floating" page, so it stands out
+   *  when it has the colour of the window
+   *  transparent disables it
+   */
+  --uc-content-outline-colour: color-mix(
+    in srgb,
+    var(--uc-inverted-colour) 12%,
+    transparent
+  );
+
   /*  Top margin for the Page Action Buttons
    *  inside the URL Bar. This might need
    *  customisation depending on your setup!
@@ -34,10 +44,11 @@
   --uc-page-action-margin: 0px;
 }
 
-/* remove window control buttons */
-.titlebar-buttonbox-container {
-  display: none !important;
-}
+/* remove window control buttons (minimise, maximise, close); on macOS
+   the native buttons stay anyway */
+/* @media not (-moz-platform: macos) {
+  .titlebar-buttonbox-container { display: none !important; }
+} */
 
 /*---+---+---+---+---+---+---+
  | T | O | O | L | B | A | R |

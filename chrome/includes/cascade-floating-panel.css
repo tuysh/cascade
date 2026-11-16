@@ -1,3 +1,20 @@
+/* the status panel (link targets, »Waiting for …«) floats away from the
+   window border; Firefox moves it to the right when the mouse gets close,
+   so the margin is the same on both sides */
 #statuspanel #statuspanel-label {
-  margin: 0 0 var(--uc-status-panel-spacing) var(--uc-status-panel-spacing) !important;
+  margin: 0 var(--uc-status-panel-spacing) var(--uc-status-panel-spacing) !important;
+}
+
+/* the status panel and the address at the bottom of an inactive split
+   view panel use the palette, with an edge so they show on any page */
+#statuspanel-label,
+split-view-footer {
+  background-color: var(--uc-base-colour) !important;
+  color: var(--uc-inverted-colour) !important;
+  border-color: var(--uc-panel-border-colour) !important;
+}
+#statuspanel #statuspanel-label {
+  border: 1px solid var(--uc-panel-border-colour) !important;
+  border-radius: var(--uc-border-radius) !important;
+  padding-inline: max(4px, var(--uc-border-radius) / 2) !important;
 }

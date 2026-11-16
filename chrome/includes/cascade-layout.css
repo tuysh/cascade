@@ -9,6 +9,11 @@
 :where(:root) {
   --uc-content-margin: 6px;
   --uc-content-border-radius: var(--uc-border-radius);
+  --uc-content-outline-colour: color-mix(
+    in srgb,
+    var(--uc-inverted-colour) 12%,
+    transparent
+  );
 }
 
 :root {
@@ -97,11 +102,6 @@
   width: 100%;
 }
 
-#statuspanel #statuspanel-label {
-  border: none !important;
-  border-radius: var(--uc-border-radius) !important;
-}
-
 /* "floating" page: a gap around the page and rounded corners;
    not while a video or the window is in fullscreen */
 :root:not([inFullscreen], [inDOMFullscreen]) {
@@ -109,8 +109,11 @@
     padding: 0 var(--uc-content-margin) var(--uc-content-margin) !important;
   }
 
-  /* split view panels already bring 4px of margin of their own */
-  #tabbrowser-tabbox:has(> #tabbrowser-tabpanels[splitview]) {
+  /* split view panels already bring 4px of margin of their own (only
+     while the split view is the one shown) */
+  #tabbrowser-tabbox:has(
+      > #tabbrowser-tabpanels[splitview] > .split-view-panel-active
+    ) {
     padding-inline: max(0px, calc(var(--uc-content-margin) - 4px)) !important;
     padding-block-end: max(
       0px,
@@ -121,5 +124,59 @@
   #tabbrowser-tabpanels .browserContainer {
     border-radius: var(--uc-content-border-radius) !important;
     overflow: clip !important;
+
+    /* keep macOS overlay scrollbars out of the rounded corners */
+    @media (-moz-platform: macos) {
+      --content-scrollbar-inset-block: var(--uc-content-border-radius) !important;
+      --content-scrollbar-inset-inline-start: var(
+        --uc-content-border-radius
+      ) !important;
+      --content-scrollbar-inset-inline-end: var(
+        --uc-content-border-radius
+      ) !important;
+    }
+  }
+
+  /* a hairline around the page, so it stands out when it has the colour
+     of the window (light mode, dark websites, next to vertical tabs) */
+  #tabbrowser-tabpanels > :not(.split-view-panel) > .browserContainer {
+    outline: 1px solid var(--uc-content-outline-colour) !important;
+    /* Nova's (transparent) separator borders push the page 1px off */
+    border-block-start: none !important;
+    border-inline: none !important;
+  }
+  #tabbrowser-tabpanels[splitview]
+    > .split-view-panel:not(.deck-selected)
+    > .browserContainer {
+    border-color: var(--uc-content-outline-colour) !important;
+  }
+
+  /* Firefox clips inactive split view panels with its own radius */
+  #tabbrowser-tabpanels[splitview] > .split-view-panel {
+    border-radius: var(--uc-content-border-radius) !important;
+  }
+
+  /* tab-modal dialogs live next to the page, not inside it, so their
+     backdrop needs the page radius of its own */
+  #tabbrowser-tabpanels .dialogOverlay[topmost="true"] {
+    border-radius: var(--uc-content-border-radius) !important;
+  }
+}
+
+/* find bar: its first-use flash and »not found« in the palette */
+.findbar-textbox {
+  &[flash="true"] {
+    background-color: color-mix(
+      in srgb,
+      var(--uc-accent-colour) 35%,
+      var(--uc-urlbar-colour)
+    ) !important;
+  }
+  &[status="notfound"] {
+    background-color: color-mix(
+      in srgb,
+      var(--uc-identity-colour-red) 30%,
+      var(--uc-urlbar-colour)
+    ) !important;
   }
 }

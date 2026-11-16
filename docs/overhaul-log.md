@@ -99,7 +99,7 @@ problema visto desde áreas distintas. Orden = prioridad.
 | B8 | Pestañas: grupos (selector roto), botones de cerrar, sonido en fijadas, línea de acento en fijadas, vista dividida, ancho adaptativo, botón nueva pestaña como opción, radios, arrastre, alturas por densidad | tabs-04..13, tabs-15..20, config-02, config-07, config-08, product-04, product-11, product-12, tabs-09 | hecho salvo tabs-15 (padding de fijadas en compacto), tabs-16 (inset de la línea de contenedor) y tabs-17 (va en B14); verificado en FF160 |
 | B9 | Barra de URL: fila seleccionada visible, colores de selección de texto, #pageActionButton, contraste de URLs/enlaces, botón de menú de 1px, hover en cajas, radios | urlbar-03..05, urlbar-08, urlbar-10..16, colours-10, colours-15, palettes-13, product-03, palettes-11, config-11, config-12, palettes-19, product-09, product-17 | hecho salvo urlbar-13 (chip de extensión: se mantiene oculto, decisión previa del proyecto) y urlbar-15 |
 | B10 | Colores: <select> de páginas ilegibles, fondo cuadrado de menús, degradado Nova, tinte violeta Nova, contenedores violet/gray, barras de notificación, panel de confianza, autocompletado, tooltips, privada, temas ligeros, botón primario contrast-color() | colours-02..09, colours-11..14, colours-17, palettes-12, product-18, product-19 | hecho salvo colours-11 (temas ligeros: hay que decidir si la paleta gana siempre o si se respeta el tema; pendiente de decisión del mantenedor) |
-| B11 | Página/ventana: panel de estado espejo, hueco en vista dividida, diálogos modales, contorno de página en modo claro, controles de ventana como opción, barra de búsqueda, decoración de vista dividida | content-01..09, palettes-17, product-14, config-04, product-16 | pendiente |
+| B11 | Página/ventana: panel de estado espejo, hueco en vista dividida, diálogos modales, contorno de página en modo claro, controles de ventana como opción, barra de búsqueda, decoración de vista dividida | content-01..09, palettes-17, product-14, config-04, product-16 | hecho (el redondeo de la página encima de la barra de búsqueda de content-09 no se hizo); verificado en FF160 |
 | B12 | Accesibilidad extra: opacidad inactiva vs contraste, forced-colors, reduced-motion | palettes-14, palettes-15, palettes-18, product-20 | pendiente |
 | B13 | Menú (Alt), arrastre de ventana | oneline-07, product-13, oneline-09 | pendiente |
 | B14 | Configuración: defaults :where para todas las opciones, restos obsoletos del config de ratón, nombres, comentarios, .editorconfig | config-05, config-06, config-10, config-13, config-16, config-17, config-21, tabs-17 | pendiente |
@@ -176,3 +176,11 @@ problema visto desde áreas distintas. Orden = prioridad.
   la paleta, tooltips con la paleta, borde lateral morado de ventanas privadas
   fuera, y **nueva opción** `--uc-private-urlbar-colour`: la barra de URL de las
   ventanas privadas se tiñe para distinguirlas.
+- **B11** `fix(layout)`: panel de estado con margen simétrico (pegado al borde al
+  pasar a la derecha) y con la paleta + borde; la vista dividida ya no reduce el
+  hueco de la página en pestañas normales; fondo de diálogos modales redondeado;
+  barras de desplazamiento de macOS fuera de las esquinas; **nueva opción**
+  `--uc-content-outline-colour`: contorno fino alrededor de la página (en modo
+  claro no se distinguía); paneles de vista dividida con el radio del tema; destello
+  y »no encontrado« de la barra de búsqueda con la paleta; controles de ventana: en
+  macOS ya no se ocultan (solapaban), y el config de ratón ya no los oculta.
