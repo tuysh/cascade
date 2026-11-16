@@ -6,6 +6,7 @@
   --uc-tab-border-radius: var(--uc-border-radius);
   --uc-tab-margin: 4px;
   --uc-active-tab-line: 2px;
+  --uc-inactive-opacity: 0.65;
 }
 
 /* hides the list-all-tabs button*/
@@ -100,6 +101,14 @@
 }
 .tabbrowser-tab[selected]:not([multiselected]) .tab-background {
   outline: none !important;
+}
+
+/* dim the tabs that are not in use */
+.tab-content {
+  transition: opacity 150ms ease;
+}
+.tabbrowser-tab:not([selected], [multiselected], :hover) .tab-content {
+  opacity: var(--uc-inactive-opacity) !important;
 }
 
 /* tab group labels */

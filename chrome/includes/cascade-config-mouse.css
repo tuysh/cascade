@@ -14,6 +14,12 @@
    */
   --uc-status-panel-spacing: 12px;
 
+  /*  Opacity of what is not in use: inactive tabs
+   *  and toolbar buttons. They light up on hover.
+   *  1 disables the effect
+   */
+  --uc-inactive-opacity: 0.65;
+
   /*  Top margin for the Page Action Buttons
    *  inside the URL Bar. This might need
    *  customisation depending on your setup!

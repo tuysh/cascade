@@ -1,3 +1,10 @@
+/* Defaults for options that a config file from an older version of
+   Cascade does not define yet. :where() has no specificity, so the
+   values in the config file always win. */
+:where(:root) {
+  --uc-inactive-opacity: 0.65;
+}
+
 :root:not([lwtheme]) #navigator-toolbox {
   background-color: var(--toolbox-background-color) !important;
 }
@@ -26,4 +33,14 @@
     --uc-urlbar-selection-colour,
     var(--uc-base-colour)
   ) !important;
+}
+
+/* dim the toolbar buttons until they are hovered or in use */
+#nav-bar .toolbarbutton-1 > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+  transition: opacity 150ms ease;
+}
+#nav-bar
+  .toolbarbutton-1:not(:hover, [open], [checked], [disabled])
+  > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+  opacity: var(--uc-inactive-opacity) !important;
 }
