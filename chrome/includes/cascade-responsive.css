@@ -37,4 +37,14 @@
   #navigator-toolbox:focus-within #TabsToolbar {
     width: calc(100vw - var(--uc-urlbar-max-width) - 1px);
   }
+
+  /* animate the URL Bar growing on focus; both toolbars use the same
+   * timing so that their widths always add up to one row
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    #nav-bar,
+    #TabsToolbar {
+      transition: width var(--uc-urlbar-transition-duration) ease;
+    }
+  }
 }

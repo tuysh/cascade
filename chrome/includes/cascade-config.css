@@ -72,7 +72,13 @@
    *  otherwise the URL Bar will always be it's min-width
    */
   --uc-urlbar-min-width: 35vw;
-  --uc-urlbar-max-width: 35vw;
+  --uc-urlbar-max-width: 45vw;
+
+  /*  Duration of the animation when the URL Bar
+   *  grows and shrinks on focus
+   *  0s disables the animation
+   */
+  --uc-urlbar-transition-duration: 200ms;
 
   /*  Position of the URL Bar
    *  possible values:

@@ -14,4 +14,11 @@
   #navigator-toolbox:focus-within #TabsToolbar {
     margin-inline-start: var(--uc-urlbar-max-width) !important;
   }
+
+  @media (prefers-reduced-motion: no-preference) {
+    #nav-bar,
+    #TabsToolbar {
+      transition: margin var(--uc-urlbar-transition-duration) ease;
+    }
+  }
 }
