@@ -89,7 +89,7 @@ problema visto desde áreas distintas. Orden = prioridad.
 
 | Bloque | Qué | Ids | Estado |
 |---|---|---|---|
-| B1 | Separar paleta y mapeo de colores (integraciones = solo paleta, compatibles hacia atrás) | config-03, colours-18, urlbar-09, palettes-20 | pendiente |
+| B1 | Separar paleta y mapeo de colores (integraciones = solo paleta, compatibles hacia atrás) | config-03, colours-18, urlbar-09, palettes-20 | hecho: mapeo en `cascade-colours-mapping.css`; 0 píxeles de diferencia, también con un userChrome.css viejo y con una integración vieja de copia completa |
 | B2 | Privacidad: no ocultar los indicadores de cámara/micrófono/pantalla/ubicación | urlbar-01, config-01, product-10 | pendiente |
 | B3 | Foco de teclado: anillos visibles y en color de acento (barra de URL, pestaña activa, botones), sin atenuar lo enfocado | urlbar-02, palettes-01, tabs-01, palettes-02, palettes-03, urlbar-06, product-05, palettes-04, colours-01, product-06 | pendiente |
 | B4 | Paletas: Ayu, por defecto (muted claro), Catppuccin, Rosé Pine, Nord, Gruvbox; highlight ≈ base | palettes-05..11, urlbar-07, colours-16, product-08 | pendiente |
@@ -108,4 +108,10 @@ problema visto desde áreas distintas. Orden = prioridad.
 
 ## Cambios hechos
 
-_(pendiente de la fase 4)_
+- **B1** `refactor(colours)`: `cascade-colours.css` y las integraciones son solo
+  paleta; el mapeo a las variables de Firefox está en
+  `includes/cascade-colours-mapping.css` (importado en userChrome.css y, por
+  compatibilidad, también al principio de cascade-layout.css). Añadidos los colores
+  de contenedor `violet` y `gray` de FF160. Nota para usuarios: si editaron el
+  mapeo dentro de su cascade-colours.css, deben mover esos cambios al final de
+  userChrome.css.
