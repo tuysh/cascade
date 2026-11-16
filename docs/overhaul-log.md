@@ -16,13 +16,17 @@ digno de usarse a diario. Si una sesión se corta, **retomar desde "Siguiente pa
 | 1 | Preparar entorno: Firefox 160 real + fuentes de su chrome + arnés de capturas | hecho |
 | 2 | Capturas "antes" (37 escenarios) | hecho |
 | 3 | Auditoría con agentes (9 áreas) + verificación adversarial de cada hallazgo | hecho (146 hallazgos; 51 verificados por 2 agentes, el resto se verifica al implementar en Firefox real) |
-| 4 | Implementar los hallazgos confirmados en commits pequeños | pendiente |
-| 5 | Capturas "después" y comparación con "antes" | pendiente |
-| 6 | Revisión independiente del diff final | pendiente |
+| 4 | Implementar los hallazgos confirmados en commits pequeños | hecho (B1–B16) |
+| 5 | Capturas "después" y comparación con "antes" | hecho (39 escenarios, sin regresiones) |
+| 6 | Revisión independiente del diff final | en curso |
 
 ## Siguiente paso
 
-Implementar los bloques de "Plan de implementación" en orden, marcando cada uno
+Fase 6: revisar el diff completo (`git diff 7407005..HEAD -- chrome integrations`)
+con revisores independientes, corregir lo confirmado y repetir las capturas. Luego
+quedan los pendientes anotados en la tabla (colours-11, config-13, tabs-15/16,
+palettes-14, CI). Para referencia, la fase 4 consistió en:
+implementar los bloques de "Plan de implementación" en orden, marcando cada uno
 como hecho (con su commit) al terminarlo. El detalle completo de cada hallazgo
 (problema, evidencia con archivo:línea de Firefox 160, arreglo propuesto y, si lo
 hay, el veredicto de los verificadores y un `better_fix`) está en
