@@ -74,9 +74,19 @@
   border-radius: var(--uc-tab-border-radius) !important;
 }
 
-/* active tab */
+/* active tab: highlight colour, plus an accent coloured line
+   when the tabs are horizontal */
 .tabbrowser-tab[selected] .tab-background {
   background: var(--uc-highlight-colour) !important;
+}
+#tabbrowser-tabs[orient="horizontal"]
+  .tabbrowser-tab[selected]
+  .tab-background {
+  background:
+    linear-gradient(var(--uc-accent-colour), var(--uc-accent-colour)) center
+      bottom / calc(100% - 2 * var(--uc-tab-padding))
+      var(--uc-active-tab-line) no-repeat,
+    var(--uc-highlight-colour) !important;
 }
 .tabbrowser-tab[selected]:not([multiselected]) .tab-background {
   outline: none !important;
