@@ -1,0 +1,117 @@
+/* Panels (app menu, extensions, downloads, translations, …),
+   context menus and dropdowns.
+
+   Everything here is built from the palette in cascade-colours.css,
+   so colour integrations do not need their own copy of this file. */
+
+:root,
+menupopup,
+panel {
+  --uc-panel-border-colour: color-mix(
+    in srgb,
+    var(--uc-inverted-colour) 12%,
+    var(--uc-base-colour)
+  );
+
+  --panel-background-color: var(--uc-base-colour) !important;
+  --panel-text-color: var(--uc-inverted-colour) !important;
+  --panel-border-color: var(--uc-panel-border-colour) !important;
+  --panel-separator-color: var(--uc-panel-border-colour) !important;
+  --panel-footer-background-color: var(--uc-highlight-colour) !important;
+  --popup-background-color: var(--uc-base-colour) !important;
+  --popup-border-color: var(--uc-panel-border-colour) !important;
+}
+
+/* Firefox resolves its button tokens on :root, so the ones derived from
+   others (ghost → menu, primary → accent) have to be set one by one */
+menupopup,
+panel {
+  --text-color: var(--uc-inverted-colour) !important;
+  --text-color-deemphasized: var(--uc-muted-colour) !important;
+  --background-color-box: var(--uc-highlight-colour) !important;
+
+  --color-accent-primary: var(--uc-accent-colour) !important;
+  --focus-outline-color: var(--uc-accent-colour) !important;
+  --link-color: var(--uc-accent-colour) !important;
+
+  /* regular buttons */
+  --uc-panel-button-hover-colour: color-mix(
+    in srgb,
+    var(--uc-inverted-colour) 12%,
+    var(--uc-highlight-colour)
+  );
+  --button-background-color: var(--uc-highlight-colour) !important;
+  --button-background-color-hover: var(
+    --uc-panel-button-hover-colour
+  ) !important;
+  --button-background-color-active: var(
+    --uc-panel-button-hover-colour
+  ) !important;
+  --button-text-color: var(--uc-inverted-colour) !important;
+  --button-text-color-hover: var(--uc-inverted-colour) !important;
+  --button-text-color-active: var(--uc-inverted-colour) !important;
+
+  /* rows of a panel and icon only buttons */
+  --button-background-color-ghost: transparent !important;
+  --button-background-color-ghost-hover: var(--uc-highlight-colour) !important;
+  --button-background-color-ghost-active: var(--uc-highlight-colour) !important;
+  --button-background-color-menu: transparent !important;
+  --button-background-color-menu-hover: var(--uc-highlight-colour) !important;
+  --button-background-color-menu-active: var(--uc-highlight-colour) !important;
+  --button-text-color-ghost: var(--uc-inverted-colour) !important;
+  --button-text-color-ghost-hover: var(--uc-inverted-colour) !important;
+  --button-text-color-ghost-active: var(--uc-inverted-colour) !important;
+  --button-text-color-menu: var(--uc-inverted-colour) !important;
+  --button-text-color-menu-hover: var(--uc-inverted-colour) !important;
+  --button-text-color-menu-active: var(--uc-inverted-colour) !important;
+
+  /* primary buttons, e.g. »Translate« */
+  --uc-panel-primary-hover-colour: color-mix(
+    in srgb,
+    var(--uc-inverted-colour) 15%,
+    var(--uc-accent-colour)
+  );
+  --button-background-color-primary: var(--uc-accent-colour) !important;
+  --button-background-color-primary-hover: var(
+    --uc-panel-primary-hover-colour
+  ) !important;
+  --button-background-color-primary-active: var(
+    --uc-panel-primary-hover-colour
+  ) !important;
+  --button-text-color-primary: var(--uc-base-colour) !important;
+  --button-text-color-primary-hover: var(--uc-base-colour) !important;
+  --button-text-color-primary-active: var(--uc-base-colour) !important;
+}
+
+/* banners at the top of the app menu (update available, add-on notices);
+   the accent coloured border keeps them noticeable */
+.panel-banner-item,
+.addon-banner-item {
+  --panel-banner-item-color: var(--uc-inverted-colour) !important;
+  --panel-banner-item-icon-color: var(--uc-accent-colour) !important;
+  --panel-banner-item-background-color: var(--uc-highlight-colour) !important;
+  --panel-banner-item-hover-bgcolor: var(
+    --uc-panel-button-hover-colour
+  ) !important;
+  --panel-banner-item-active-bgcolor: var(
+    --uc-panel-button-hover-colour
+  ) !important;
+  border-color: var(--uc-accent-colour) !important;
+}
+
+/* context menus and dropdowns use system colours directly */
+menupopup {
+  background-color: var(--uc-base-colour) !important;
+  color: var(--uc-inverted-colour) !important;
+}
+
+menupopup :is(menuitem, menu) {
+  &:where([_moz-menuactive]:not([disabled])) {
+    background-color: var(--uc-highlight-colour) !important;
+    color: var(--uc-inverted-colour) !important;
+  }
+
+  &:where([_moz-menuactive][disabled]) {
+    background-color: transparent !important;
+  }
+}
