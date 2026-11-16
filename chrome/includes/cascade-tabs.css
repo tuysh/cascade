@@ -4,32 +4,43 @@
 :where(:root) {
   --uc-tab-padding: 14px;
   --uc-tab-border-radius: var(--uc-border-radius);
-  --uc-tab-margin: var(--tab-margin-block);
+  --uc-tab-margin: calc((var(--tabstrip-min-height) - var(--urlbar-height)) / 2);
   --uc-active-tab-line: 2px;
   --uc-inactive-opacity: 0.65;
 }
 
-/* hides the list-all-tabs button*/
-#alltabs-button {
+/* the »List all tabs« button; customize mode always shows it */
+:root:not([customizing]) #alltabs-button {
   display: var(--uc-show-all-tabs-button) !important;
 }
 
-/* remove tab shadow */
-.tabbrowser-tab > .tab-stack > .tab-background {
+/* remove tab shadow, but keep the stacked look of several tabs being
+   dragged together */
+.tabbrowser-tab:not([small-stack], [big-stack]) > .tab-stack > .tab-background {
   box-shadow: none !important;
 }
 
 /* multi tab selection */
 .tabbrowser-tab[multiselected] > .tab-stack > .tab-background {
-  outline-color: var(--toolbarseparator-color) !important;
+  outline-color: var(--uc-accent-colour) !important;
 }
 
 /* tab close button options */
 .tabbrowser-tab:not([pinned]) .tab-close-button {
   display: var(--show-tab-close-button) !important;
 }
-.tabbrowser-tab:not([pinned]):hover .tab-close-button {
-  display: var(--show-tab-close-button-hover) !important;
+/* on hover, unless it is always shown anyway */
+@container style(--show-tab-close-button: none) {
+  .tabbrowser-tab:not([pinned]):hover .tab-close-button {
+    display: var(--show-tab-close-button-hover) !important;
+  }
+}
+/* like Firefox: no close button on background tabs that are too narrow
+   to be clicked safely (tab bar full or overflowing), until hovered */
+#tabbrowser-tabs[closebuttons="activetab"][orient="horizontal"]
+  .tabbrowser-tab:not([selected], :hover)
+  .tab-close-button {
+  display: none !important;
 }
 
 /* adaptive tab width; vertical tabs fill the sidebar instead. The tabs
@@ -44,6 +55,18 @@
       tab-group[collapsed] .tabbrowser-tab:not([multiselected])
     ) {
     max-width: var(--uc-inactive-tab-width) !important;
+  }
+
+  /* once the tab bar is full the active tab keeps a bigger share of it */
+  .tabbrowser-tab[selected][fadein]:not([pinned]) {
+    flex-grow: 200 !important;
+  }
+
+  /* the two tabs of a split view share one box; give it room for two */
+  tab-split-view-wrapper:not(
+      tab-group[collapsed] > tab-split-view-wrapper:not([hasactivetab])
+    ) {
+    max-width: calc(2 * var(--uc-inactive-tab-width)) !important;
   }
 }
 
@@ -65,30 +88,32 @@
   box-shadow: var(--uc-identity-glow) var(--identity-tab-color) !important;
 }
 
-/* audio indicator on pinned tabs */
-.tab-icon-overlay:not([crashed]):is(
-    [soundplaying],
-    [muted],
-    [activemedia-blocked]
-  ) {
-  border-radius: 10px !important;
+/* audio indicator on pinned tabs (and in the collapsed vertical sidebar):
+   inverted on hover through Firefox's own hover layer */
+.tab-icon-overlay:not([crashed]):is([soundplaying], [muted], [activemedia-blocked]) {
   box-shadow: none !important;
 
-  color: var(--toolbar-text-color) !important;
-  stroke: var(--toolbox-background-color) !important;
-  background-color: var(--toolbox-background-color) !important;
-
   &:hover {
+    --audio-overlay-extra-background: var(--toolbar-text-color) !important;
     color: var(--toolbox-background-color) !important;
-    stroke: var(--toolbar-text-color) !important;
-    background-color: var(--toolbar-text-color) !important;
   }
 }
 
 /* tab shape */
 .tab-background {
-  margin-block: var(--uc-tab-margin) !important;
   border-radius: var(--uc-tab-border-radius) !important;
+}
+
+/* as tall as the URL Bar (by default) in every density, with Nova on and
+   off; Firefox's min-height would otherwise make the toolbar taller */
+#tabbrowser-tabs[orient="horizontal"]
+  .tabbrowser-tab:not(tab-split-view-wrapper .tabbrowser-tab)
+  > .tab-stack
+  > .tab-background {
+  margin-block: var(--uc-tab-margin) !important;
+  min-height: calc(
+    var(--tabstrip-min-height) - 2 * var(--uc-tab-margin)
+  ) !important;
 }
 
 /* the two tabs of a split view share one box that already has the margin */
@@ -116,7 +141,7 @@ tab-split-view-wrapper .tab-background {
   .tab-background {
   background:
     linear-gradient(var(--uc-accent-colour), var(--uc-accent-colour)) center
-      bottom / calc(100% - 2 * var(--uc-tab-padding))
+      bottom / max(16px, calc(100% - 2 * var(--uc-tab-padding)))
       var(--uc-active-tab-line) no-repeat,
     var(--uc-highlight-colour) !important;
 }
@@ -133,33 +158,49 @@ tab-split-view-wrapper .tab-background {
   outline-color: var(--focus-outline-color) !important;
 }
 
-/* dim the tabs that are not in use */
-.tab-content {
-  transition: opacity 150ms ease;
-}
-.tabbrowser-tab:not(
-    [selected],
-    [multiselected],
-    :hover,
-    #tabbrowser-tabs[tablist-has-focus] .tablist-keyboard-focus
-  )
-  .tab-content {
-  opacity: var(--uc-inactive-opacity) !important;
+/* dim the title and icon of the tabs that are not in use; the sound,
+   sharing, attention and loading indicators stay bright. Not when more
+   contrast is asked for */
+@media not ((prefers-contrast: more) or (forced-colors)) {
+  @media (prefers-reduced-motion: no-preference) {
+    .tabbrowser-tab :is(.tab-label-container, .tab-icon-image:not([pending])) {
+      transition: opacity 150ms ease;
+    }
+  }
+  .tabbrowser-tab:not(
+      [selected],
+      [multiselected],
+      :hover,
+      #tabbrowser-tabs[tablist-has-focus] .tablist-keyboard-focus
+    )
+    :is(.tab-label-container, .tab-icon-image:not([pending])) {
+    opacity: var(--uc-inactive-opacity) !important;
+  }
 }
 
 /* tab group labels */
-.tab-group-label-container > .tab-group-label {
-  outline: none !important;
+.tab-group-label {
   border-radius: var(--uc-border-radius) !important;
-  width: 100%;
-  /* disable tab group label changing colour when collapsed */
-  color: light-dark(var(--tab-group-color-pale), var(--tab-group-label-text-dark)) !important;
-  background-color: light-dark(var(--tab-group-color), var(--tab-group-color-invert)) !important;
+}
+/* Nova off: keep the label colours when the group is collapsed
+   (Nova already does) */
+@media not -moz-pref("browser.nova.enabled") {
+  tab-group[collapsed] > .tab-group-label-container .tab-group-label {
+    color: light-dark(
+      var(--tab-group-color-pale),
+      var(--tab-group-label-text-dark)
+    ) !important;
+    background-color: var(--tab-group-color) !important;
+
+    &:not(#tabbrowser-tabs[tablist-has-focus] .tablist-keyboard-focus) {
+      outline: none !important;
+    }
+  }
 }
 
-/* hide vertical tabs new tab button, there is also one for overflow */
-#vertical-tabs-newtab-button, #tabs-newtab-button {
-  display: none !important;
+/* tab hover preview: the radius of the other panels */
+#tab-preview-panel {
+  --panel-border-radius: var(--uc-border-radius) !important;
 }
 
 /* hide vertical tabs action buttons */

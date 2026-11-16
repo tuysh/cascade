@@ -96,7 +96,7 @@ problema visto desde áreas distintas. Orden = prioridad.
 | B5 | Pestañas verticales: márgenes, anchos adaptativos, iconos centrados al plegar, hover ≠ activa | tabs-02, tabs-03, product-02, tabs-14, palettes-16, product-07 | hecho: verificado en FF160 (expandida, plegada, hover) |
 | B6 | Layout de una línea: animación al redimensionar (@property), ventana nueva con URL enfocada, modo personalizar, código muerto, salto de 20px al crecer | oneline-01, oneline-03, oneline-04, config-09, oneline-06, oneline-08, product-01 | hecho: verificado en FF160 (redimensionar sin animación, menú » correcto, modo personalizar) |
 | B7 | Quitar/neutralizar cascade-responsive-windows-fix.css (obsoleto en FF160) | oneline-02, oneline-05, config-14, extensions-02 | hecho: el archivo reenvía a cascade-responsive.css |
-| B8 | Pestañas: grupos (selector roto), botones de cerrar, sonido en fijadas, línea de acento en fijadas, vista dividida, ancho adaptativo, botón nueva pestaña como opción, radios, arrastre, alturas por densidad | tabs-04..13, tabs-15..20, config-02, config-07, config-08, product-04, product-11, product-12, tabs-09 | pendiente |
+| B8 | Pestañas: grupos (selector roto), botones de cerrar, sonido en fijadas, línea de acento en fijadas, vista dividida, ancho adaptativo, botón nueva pestaña como opción, radios, arrastre, alturas por densidad | tabs-04..13, tabs-15..20, config-02, config-07, config-08, product-04, product-11, product-12, tabs-09 | hecho salvo tabs-15 (padding de fijadas en compacto), tabs-16 (inset de la línea de contenedor) y tabs-17 (va en B14); verificado en FF160 |
 | B9 | Barra de URL: fila seleccionada visible, colores de selección de texto, #pageActionButton, contraste de URLs/enlaces, botón de menú de 1px, hover en cajas, radios | urlbar-03..05, urlbar-08, urlbar-10..16, colours-10, colours-15, palettes-13, product-03, palettes-11, config-11, config-12, palettes-19, product-09, product-17 | pendiente |
 | B10 | Colores: <select> de páginas ilegibles, fondo cuadrado de menús, degradado Nova, tinte violeta Nova, contenedores violet/gray, barras de notificación, panel de confianza, autocompletado, tooltips, privada, temas ligeros, botón primario contrast-color() | colours-02..09, colours-11..14, colours-17, palettes-12, product-18, product-19 | pendiente |
 | B11 | Página/ventana: panel de estado espejo, hueco en vista dividida, diálogos modales, contorno de página en modo claro, controles de ventana como opción, barra de búsqueda, decoración de vista dividida | content-01..09, palettes-17, product-14, config-04, product-16 | pendiente |
@@ -147,3 +147,14 @@ problema visto desde áreas distintas. Orden = prioridad.
   `cascade-responsive-windows-fix.css` ahora solo importa cascade-responsive.css
   (obsoleto desde FF133 y con bugs propios). Pendiente: actualizar la web de
   documentación externa, que aún dice que hay que cambiarlo en Windows.
+- **B8** `fix(tabs)`: etiquetas de grupos (el selector ya no coincidía con FF160),
+  botones de cerrar (»siempre« + »hover no« lo ocultaba al pasar el ratón; ahora con
+  `@container style()`), indicador de sonido en fijadas visible en hover, línea de
+  acento de pestaña fijada ≥ 16px (no parece el punto de atención), vista dividida
+  con sitio para dos títulos, la pestaña activa se queda con más espacio cuando la
+  barra está llena, sombra de arrastre de varias pestañas, radio de pestañas
+  aplicado a todo lo de Firefox, vista previa al pasar el ratón con el radio del
+  tema, atenuar solo título e icono (no los indicadores) y nada si se pide más
+  contraste, pestañas tan altas como la barra de URL en todas las densidades con
+  Nova y sin Nova (medido: 6/6 combinaciones). Botones de nueva pestaña: la regla
+  pasa a los configs (el de ratón ya no los oculta).

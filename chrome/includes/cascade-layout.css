@@ -13,7 +13,7 @@
 
 :root {
   --toolbarbutton-border-radius: var(--uc-border-radius) !important;
-  --tab-border-radius: var(--uc-border-radius) !important;
+  --tab-border-radius: var(--uc-tab-border-radius, var(--uc-border-radius)) !important;
   --urlbar-border-radius: var(--uc-border-radius) !important;
   /* boxes inside the URL Bar (site info, bookmark star, result rows);
      Firefox derives this from the 24px default and ends up at 0 */

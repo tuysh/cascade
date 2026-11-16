@@ -145,6 +145,12 @@
 /* Hides the Extensions Menu Icon */
 /* #unified-extensions-button { display: none !important; } */
 
+/* Hides the New Tab buttons next to the tabs (Ctrl+T, or a double click
+   on the empty tab bar still open one); the one at the end of an
+   overflowing tab bar stays */
+/* #tabs-newtab-button,
+#vertical-tabs-newtab-button { display: none !important; } */
+
 #alltabs-button {
   margin-top: 5px !important;
 }
@@ -167,12 +173,12 @@
   --uc-tab-padding: 14px;
 
   /*  Shape of the tabs
-   *  floating: the Global Border Radius, and the margin Firefox uses
-   *  for the current density so tabs are as tall as the URL Bar
+   *  floating: the Global Border Radius, and the margin that makes
+   *  tabs as tall as the URL Bar in every density
    *  square and full height (classic Cascade): set both to 0px
    */
   --uc-tab-border-radius: var(--uc-border-radius);
-  --uc-tab-margin: var(--tab-margin-block);
+  --uc-tab-margin: calc((var(--tabstrip-min-height) - var(--urlbar-height)) / 2);
 
   /*  Thickness of the accent coloured line
    *  marking the active tab (under it, or next to it
@@ -182,6 +188,8 @@
   --uc-active-tab-line: 2px;
 
   /*  Enable this to always show the Tab Close button
+   *  (like Firefox, background tabs that are too narrow
+   *  to be clicked safely only show it on hover)
    *  possible values:
    *  show: flex
    *  hide: none
@@ -189,13 +197,15 @@
   --show-tab-close-button: none;
 
   /*  Enable this to only show the Tab Close button on tab hover
+   *  (only matters while the option above is none)
    *  possible values:
    *  show: flex
    *  hide: none
    */
   --show-tab-close-button-hover: flex;
 
-  /*  Hide the all Tabs button from the Tab Bar
+  /*  Show or hide the »List all tabs« button
+   *  (it also lists saved tab groups)
    *  possible values:
    *  show: flex
    *  hide: none
