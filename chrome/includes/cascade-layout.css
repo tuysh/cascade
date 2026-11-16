@@ -38,12 +38,11 @@
   --button-border-radius: var(--urlbar-inner-border-radius) !important;
 }
 
-#toolbar-menubar {
-  &[autohide] {
-    &[inactive]:not([customizing]) {
-      width: 0px;
-    }
-  }
+/* the hidden menu bar takes no room (Firefox keeps 1px, 100px in
+   customize mode) */
+#toolbar-menubar[autohide][inactive] {
+  min-width: 0 !important;
+  width: 0 !important;
 }
 
 #main-window,

@@ -1,39 +1,5 @@
-/* Defaults for options that a config file from an older version of
-   Cascade does not define yet. :where() has no specificity, so the
-   values in the config file always win. */
-:where(:root) {
-  --uc-urlbar-transition-duration: 200ms;
-}
-
-@media (min-width: 1000px) {
-  #nav-bar {
-    margin: calc((var(--urlbar-height) + 2 * var(--urlbar-padding-block)) * -1)
-      calc(100vw - var(--uc-urlbar-min-width)) 0 0 !important;
-  }
-  #TabsToolbar {
-    margin-inline-start: var(--uc-urlbar-min-width) !important;
-  }
-
-  #navigator-toolbox:has(#urlbar:is(:focus-within, [open])) #nav-bar {
-    margin: calc((var(--urlbar-height) + 2 * var(--urlbar-padding-block)) * -1)
-      calc(100vw - var(--uc-urlbar-max-width)) 0 0 !important;
-  }
-  #navigator-toolbox:has(#urlbar:is(:focus-within, [open])) #TabsToolbar {
-    margin-inline-start: var(--uc-urlbar-max-width) !important;
-  }
-
-  /* no tab bar next to the Navigation Bar: native vertical tabs
-   * and popup windows
-   */
-  #navigator-toolbox[tabs-hidden] #nav-bar,
-  #nav-bar.browser-titlebar {
-    margin: 0 !important;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    #nav-bar,
-    #TabsToolbar {
-      transition: margin var(--uc-urlbar-transition-duration) ease;
-    }
-  }
-}
+/* This used to be a margin based variant of the oneline layout for
+   Windows. Since Firefox 133 removed #titlebar the regular layout works
+   on Windows too, and this variant had bugs of its own; it is kept so
+   that a userChrome.css importing it keeps working. */
+@import url("cascade-responsive.css");

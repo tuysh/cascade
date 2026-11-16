@@ -5,6 +5,18 @@
   --uc-urlbar-transition-duration: 200ms;
 }
 
+/* How far the URL Bar has grown towards its max-width, from 0 to 1.
+ * This is what gets animated instead of the width: a width in vw changes
+ * on every window resize, and an animated width would make Firefox measure
+ * the toolbar halfway, leaving buttons drawn over the tabs or stuck in the
+ * overflow menu (»).
+ */
+@property --uc-urlbar-grow {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
 @media (min-width: 1000px) {
   #navigator-toolbox {
     display: flex;
@@ -12,9 +24,17 @@
     flex-direction: row;
   }
 
+  /* #TabsToolbar has flex="1", which Firefox turns into `flex: 1 !important`:
+   * it takes whatever the Navigation Bar leaves of the row, so only the
+   * Navigation Bar needs a width.
+   */
   #nav-bar {
     order: var(--uc-urlbar-position);
-    width: var(--uc-urlbar-min-width);
+    width: calc(
+      var(--uc-urlbar-min-width) +
+        (var(--uc-urlbar-max-width) - var(--uc-urlbar-min-width)) *
+        var(--uc-urlbar-grow)
+    );
   }
 
   /* Let the URL Bar shrink instead of pushing the buttons next to it
@@ -27,36 +47,40 @@
     width: auto !important;
   }
 
-  #TabsToolbar {
-    width: calc(100vw - var(--uc-urlbar-min-width) - 1px);
+  /* the URL Bar gets all the room of the Navigation Bar; Firefox's flexible
+   * spaces next to it would take part of it, and shift it while it grows
+   */
+  #navigator-toolbox:not([tabs-hidden]) #nav-bar:not([customizing]) toolbarspring {
+    flex-grow: 0 !important;
   }
 
-  /* grow while the URL Bar is in use */
-  #navigator-toolbox:has(#urlbar:is(:focus-within, [open])) {
-    #nav-bar {
-      width: var(--uc-urlbar-max-width);
-    }
-
-    #TabsToolbar {
-      width: calc(100vw - var(--uc-urlbar-max-width) - 1px);
-    }
+  /* grow while the results are open; not on focus alone, a new window
+   * focuses the URL Bar before Firefox has filled the toolbar
+   */
+  #navigator-toolbox:has(#urlbar[open]) #nav-bar {
+    --uc-urlbar-grow: 1;
   }
 
-  /* no tab bar next to the Navigation Bar: native vertical tabs
-   * and popup windows
+  /* a row of its own: no tab bar next to the Navigation Bar (native
+   * vertical tabs, popup windows, mini windows and taskbar tabs), or
+   * customize mode, which moves every overflowed button back into it
    */
   #navigator-toolbox[tabs-hidden] #nav-bar,
-  #nav-bar.browser-titlebar {
+  #nav-bar[customizing] {
     width: 100% !important;
   }
 
-  /* animate the URL Bar growing on focus; both toolbars use the same
-   * timing so that their widths always add up to one row
-   */
   @media (prefers-reduced-motion: no-preference) {
-    #nav-bar,
-    #TabsToolbar {
-      transition: width var(--uc-urlbar-transition-duration) ease;
+    #nav-bar {
+      transition: --uc-urlbar-grow var(--uc-urlbar-transition-duration) ease;
     }
   }
+}
+
+/* never draw a button that no longer fits over the tabs; not while the
+ * results are open, their background reaches past the URL Bar (and the
+ * bar is at its widest then, so nothing can spill)
+ */
+#navigator-toolbox:not(:has(#urlbar[open])) #nav-bar-customization-target {
+  overflow-x: clip;
 }

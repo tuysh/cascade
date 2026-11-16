@@ -81,14 +81,14 @@
 
 :root {
   /*  Width of the URL Bar for the Oneline layout
-   *  If enabled the max-width is applied on focus
-   *  otherwise the URL Bar will always be it's min-width
+   *  it grows to the max-width while its results are open;
+   *  use the same value for both to keep it at one width
    */
   --uc-urlbar-min-width: 35vw;
   --uc-urlbar-max-width: 45vw;
 
   /*  Duration of the animation when the URL Bar
-   *  grows and shrinks on focus
+   *  grows and shrinks
    *  0s disables the animation
    */
   --uc-urlbar-transition-duration: 200ms;

@@ -94,8 +94,8 @@ problema visto desde áreas distintas. Orden = prioridad.
 | B3 | Foco de teclado: anillos visibles y en color de acento (barra de URL, pestaña activa, botones), sin atenuar lo enfocado | urlbar-02, palettes-01, tabs-01, palettes-02, palettes-03, urlbar-06, product-05, palettes-04, colours-01, product-06 | hecho: verificado en FF160 (anillos en pestaña activa, pestaña con Ctrl+→, estrella; vista dividida y buscador lateral en acento) |
 | B4 | Paletas: Ayu, por defecto (muted claro), Catppuccin, Rosé Pine, Nord, Gruvbox; highlight ≈ base | palettes-05..11, urlbar-07, colours-16, product-08 | hecho: 8 paletas renderizadas en FF160 en oscuro y claro (falta la barra de acento en el resultado seleccionado de palettes-11, va en B9) |
 | B5 | Pestañas verticales: márgenes, anchos adaptativos, iconos centrados al plegar, hover ≠ activa | tabs-02, tabs-03, product-02, tabs-14, palettes-16, product-07 | hecho: verificado en FF160 (expandida, plegada, hover) |
-| B6 | Layout de una línea: animación al redimensionar (@property), ventana nueva con URL enfocada, modo personalizar, código muerto, salto de 20px al crecer | oneline-01, oneline-03, oneline-04, config-09, oneline-06, oneline-08, product-01 | pendiente |
-| B7 | Quitar/neutralizar cascade-responsive-windows-fix.css (obsoleto en FF160) | oneline-02, oneline-05, config-14, extensions-02 | pendiente |
+| B6 | Layout de una línea: animación al redimensionar (@property), ventana nueva con URL enfocada, modo personalizar, código muerto, salto de 20px al crecer | oneline-01, oneline-03, oneline-04, config-09, oneline-06, oneline-08, product-01 | hecho: verificado en FF160 (redimensionar sin animación, menú » correcto, modo personalizar) |
+| B7 | Quitar/neutralizar cascade-responsive-windows-fix.css (obsoleto en FF160) | oneline-02, oneline-05, config-14, extensions-02 | hecho: el archivo reenvía a cascade-responsive.css |
 | B8 | Pestañas: grupos (selector roto), botones de cerrar, sonido en fijadas, línea de acento en fijadas, vista dividida, ancho adaptativo, botón nueva pestaña como opción, radios, arrastre, alturas por densidad | tabs-04..13, tabs-15..20, config-02, config-07, config-08, product-04, product-11, product-12, tabs-09 | pendiente |
 | B9 | Barra de URL: fila seleccionada visible, colores de selección de texto, #pageActionButton, contraste de URLs/enlaces, botón de menú de 1px, hover en cajas, radios | urlbar-03..05, urlbar-08, urlbar-10..16, colours-10, colours-15, palettes-13, product-03, palettes-11, config-11, config-12, palettes-19, product-09, product-17 | pendiente |
 | B10 | Colores: <select> de páginas ilegibles, fondo cuadrado de menús, degradado Nova, tinte violeta Nova, contenedores violet/gray, barras de notificación, panel de confianza, autocompletado, tooltips, privada, temas ligeros, botón primario contrast-color() | colours-02..09, colours-11..14, colours-17, palettes-12, product-18, product-19 | pendiente |
@@ -137,3 +137,13 @@ problema visto desde áreas distintas. Orden = prioridad.
   barra plegada, anchos adaptativos solo en horizontal (antes cortaban los títulos a
   200px en la barra lateral), línea de acento vertical junto a la pestaña activa, y
   hover a medio camino del highlight para no confundirse con la pestaña activa.
+- **B6/B7** `fix(layout)`: se anima `--uc-urlbar-grow` (registrado con `@property`)
+  en lugar del ancho, así redimensionar la ventana ya no deja botones dibujados
+  encima de las pestañas ni atascados en el menú ». La barra crece solo con los
+  resultados abiertos (una ventana nueva enfocaba la barra antes de llenar la
+  barra de herramientas). Modo personalizar en una fila propia. Fuera el código
+  muerto de anchos de #TabsToolbar y el «- 1px». Los muelles flexibles junto a la
+  barra ya no le roban sitio (saltaba 20px al crecer).
+  `cascade-responsive-windows-fix.css` ahora solo importa cascade-responsive.css
+  (obsoleto desde FF133 y con bugs propios). Pendiente: actualizar la web de
+  documentación externa, que aún dice que hay que cambiarlo en Windows.
