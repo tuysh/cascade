@@ -46,6 +46,14 @@
   }
 }
 
+/* Defaults for options that a config file from an older version of
+   Cascade does not define yet. :where() has no specificity, so the
+   values in the config file always win. */
+:where(:root) {
+  --uc-urlbar-colour: var(--uc-highlight-colour);
+  --uc-urlbar-selection-colour: var(--uc-base-colour);
+}
+
 /* Down here I'm just reassigning variables based on the colours set above.
    Feel free to play around with these but there is no editing necessary below this line. c:
    */

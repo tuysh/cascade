@@ -1,3 +1,10 @@
+/* Defaults for options that a config file from an older version of
+   Cascade does not define yet. :where() has no specificity, so the
+   values in the config file always win. */
+:where(:root) {
+  --uc-urlbar-transition-duration: 200ms;
+}
+
 @media (min-width: 1000px) {
   #navigator-toolbox {
     display: flex;
