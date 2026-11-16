@@ -189,6 +189,13 @@
    */
   --show-tab-close-button-hover: flex;
 
+  /*  Hide the all Tabs button from the Tab Bar
+   *  possible values:
+   *  show: flex
+   *  hide: none
+   */
+  --uc-show-all-tabs-button: flex;
+
   /*  Left and Right "dip" of the container indicator
    *  0px equals tab width
    *  higher values make the indicator smaller

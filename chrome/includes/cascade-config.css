@@ -100,12 +100,6 @@
    */
   --uc-urlbar-position: 1;
 
-  /*  Firefox can be a little wonky with the vertical
-   *  URL Bar placement. Change this variable to adapt
-   *  to this when necessary.
-   */
-  --uc-urlbar-top-spacing: 1px;
-
   /*  Background of the URL Bar, and of the things highlighted
    *  inside of it (selected result, hovered icons, labels)
    *  blend into the toolbar (classic Cascade): swap the two colours
