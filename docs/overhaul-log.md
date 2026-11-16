@@ -100,8 +100,8 @@ problema visto desde áreas distintas. Orden = prioridad.
 | B9 | Barra de URL: fila seleccionada visible, colores de selección de texto, #pageActionButton, contraste de URLs/enlaces, botón de menú de 1px, hover en cajas, radios | urlbar-03..05, urlbar-08, urlbar-10..16, colours-10, colours-15, palettes-13, product-03, palettes-11, config-11, config-12, palettes-19, product-09, product-17 | hecho salvo urlbar-13 (chip de extensión: se mantiene oculto, decisión previa del proyecto) y urlbar-15 |
 | B10 | Colores: <select> de páginas ilegibles, fondo cuadrado de menús, degradado Nova, tinte violeta Nova, contenedores violet/gray, barras de notificación, panel de confianza, autocompletado, tooltips, privada, temas ligeros, botón primario contrast-color() | colours-02..09, colours-11..14, colours-17, palettes-12, product-18, product-19 | hecho salvo colours-11 (temas ligeros: hay que decidir si la paleta gana siempre o si se respeta el tema; pendiente de decisión del mantenedor) |
 | B11 | Página/ventana: panel de estado espejo, hueco en vista dividida, diálogos modales, contorno de página en modo claro, controles de ventana como opción, barra de búsqueda, decoración de vista dividida | content-01..09, palettes-17, product-14, config-04, product-16 | hecho (el redondeo de la página encima de la barra de búsqueda de content-09 no se hizo); verificado en FF160 |
-| B12 | Accesibilidad extra: opacidad inactiva vs contraste, forced-colors, reduced-motion | palettes-14, palettes-15, palettes-18, product-20 | pendiente |
-| B13 | Menú (Alt), arrastre de ventana | oneline-07, product-13, oneline-09 | pendiente |
+| B12 | Accesibilidad extra: opacidad inactiva vs contraste, forced-colors, reduced-motion | palettes-14, palettes-15, palettes-18, product-20 | hecho salvo palettes-14 (etiquetas atenuadas con el color muted en vez de opacidad) y palettes-18 (va en B15) |
+| B13 | Menú (Alt), arrastre de ventana | oneline-07, product-13, oneline-09 | hecho salvo oneline-09 (refutado por un verificador) |
 | B14 | Configuración: defaults :where para todas las opciones, restos obsoletos del config de ratón, nombres, comentarios, .editorconfig | config-05, config-06, config-10, config-13, config-16, config-17, config-21, tabs-17 | pendiente |
 | B15 | Integraciones de extensiones (Tab Center Reborn, Side View) | extensions-01..13, config-15 | pendiente |
 | B16 | Documentación: README, contributing, plantillas | config-18, config-19, config-20 | pendiente |
@@ -184,3 +184,8 @@ problema visto desde áreas distintas. Orden = prioridad.
   claro no se distinguía); paneles de vista dividida con el radio del tema; destello
   y »no encontrado« de la barra de búsqueda con la paleta; controles de ventana: en
   macOS ya no se ocultan (solapaban), y el config de ratón ya no los oculta.
+- **B12/B13** `fix(a11y)`: en modo de alto contraste (forced-colors) la paleta
+  cede a los colores del sistema; sin atenuación con `prefers-contrast: more`; las
+  transiciones de los botones respetan `prefers-reduced-motion`. Barra de menú:
+  etiquetas centradas y, al pulsar Alt, en una fila propia (antes empujaba la barra
+  de URL y las pestañas unos 350px).

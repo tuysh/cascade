@@ -215,3 +215,17 @@ notification-message.infobar {
     var(--uc-inverted-colour)
   ) !important;
 }
+
+/* High contrast mode (forced colours): every palette steps aside for the
+   system colours */
+@media (forced-colors) {
+  :root {
+    --uc-base-colour: Canvas !important;
+    --uc-highlight-colour: SelectedItem !important;
+    --uc-inverted-colour: CanvasText !important;
+    --uc-muted-colour: GrayText !important;
+    --uc-accent-colour: SelectedItem !important;
+    --uc-accent-text-colour: CanvasText !important;
+    --tab-text-color-selected: SelectedItemText !important;
+  }
+}

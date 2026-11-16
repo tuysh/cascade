@@ -61,6 +61,13 @@
     --uc-urlbar-grow: 1;
   }
 
+  /* the menu bar shown with Alt gets a row of its own, as in stock
+   * Firefox, instead of pushing the URL Bar and the tabs sideways
+   */
+  #toolbar-menubar[autohide]:not([inactive]) {
+    width: 100%;
+  }
+
   /* a row of its own: no tab bar next to the Navigation Bar (native
    * vertical tabs, popup windows, mini windows and taskbar tabs), or
    * customize mode, which moves every overflowed button back into it

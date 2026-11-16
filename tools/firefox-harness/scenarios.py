@@ -89,6 +89,8 @@ sc("sidebar-bookmarks", DARK + ["sidebar.revamp=true"], seq=[OPEN5, 2500, PRELUD
 sc("status", DARK, seq=[OPEN5, 2500, PRELUDE + "XULBrowserWindow.setOverLink('https://example.com/some/long/link/target');", 800, "SHOT"])
 sc("customize", DARK, seq=[OPEN5, 2500, PRELUDE + "gCustomizeMode.enter();", 3500, "SHOT"])
 sc("menubar", DARK, seq=[OPEN5, 2500, PRELUDE + "setToolbarVisibility(document.getElementById('toolbar-menubar'), true);", 1500, "SHOT"])
+sc("menubar-alt", DARK, seq=[OPEN5, 2500, PRELUDE + "document.getElementById('toolbar-menubar').removeAttribute('inactive');", 1200, "SHOT"])
+sc("forced-colors", DARK + ["ui.useAccessibilityTheme=1", "browser.display.document_color_use=2"], seq=[OPEN5, 2500, "SHOT"])
 sc("notification", DARK, seq=[OPEN5, 2500, PRELUDE + "gNotificationBox.appendNotification('test', {label: 'Firefox is not your default browser', priority: gNotificationBox.PRIORITY_INFO_MEDIUM}, [{label: 'Set as default'}]);", 1500, "SHOT"])
 sc("identity-panel", DARK, seq=[OPEN5, 2500, {"click_js": CENTER % "document.getElementById('identity-icon-box')"}, 1500, "SHOT"])
 sc("keyboard-nav", DARK, seq=[OPEN5, 2500, PRELUDE + "gURLBar.focus();", 500, {"xkey": "shift+Tab"}, 400, "SHOT"])

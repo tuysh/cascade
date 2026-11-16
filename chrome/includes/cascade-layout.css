@@ -50,11 +50,17 @@
   border-radius: var(--uc-border-radius) !important;
 }
 
-/* the hidden menu bar takes no room (Firefox keeps 1px, 100px in
-   customize mode) */
-#toolbar-menubar[autohide][inactive] {
-  min-width: 0 !important;
-  width: 0 !important;
+/* The menu bar shares the row with the other toolbars. While hidden it
+   takes no room at all (Firefox keeps 1px, and 100px in customize mode);
+   while shown its labels are centred like the buttons, Firefox pins them
+   to the top */
+#toolbar-menubar {
+  align-items: center;
+
+  &[autohide][inactive] {
+    min-width: 0 !important;
+    width: 0 !important;
+  }
 }
 
 #main-window,
