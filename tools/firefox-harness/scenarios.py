@@ -81,7 +81,13 @@ sc("groups", DARK, seq=[OPEN5 + "gBrowser.addTrustedTab(url('mail')); gBrowser.a
 sc("split", DARK, seq=[OPEN5, 2500, PRELUDE + "gBrowser.addTabSplitView([gBrowser.tabs[1], gBrowser.tabs[2]], {insertBefore: gBrowser.tabs[1]}); gBrowser.selectedTab = gBrowser.tabs[1];", 2500, "SHOT"])
 sc("containers", DARK + ["privacy.userContext.enabled=true", "privacy.userContext.ui.enabled=true"], seq=[PRELUDE + "for (const [s,id] of [['cascade',1],['notes',2],['hn',3],['rust',4],['wiki',0]]) gBrowser.addTrustedTab(url(s), {userContextId: id}); gBrowser.removeTab(gBrowser.tabs[0]); gBrowser.selectedTab = gBrowser.tabs[1];", 3000, "SHOT"])
 sc("bookmarks", DARK + ["browser.toolbars.bookmarks.visibility=\"always\""], seq=[OPEN5, 2500, "SHOT"])
-sc("private", DARK + ["browser.privatebrowsing.autostart=true"], seq=[OPEN5, 2500, "SHOT"])
+# a private window next to a normal one (privatebrowsingmode="temporary"),
+# and permanent private browsing mode, where every window is private
+PRIV = PRELUDE + "OpenBrowserWindow({private: true});"
+PRIV_TABS = PRELUDE + "const w = Services.wm.getMostRecentWindow('navigator:browser'); w.document.documentElement.removeAttribute('remotecontrol'); w.resizeTo(1400, 800); w.moveTo(0, 0); for (const s of ['cascade','notes','hn']) w.gBrowser.addTrustedTab(url(s)); w.gBrowser.selectedTab = w.gBrowser.tabs[1]; w.focus();"
+sc("private", DARK, seq=[PRIV, 2500, PRIV_TABS, 2500, "SHOT"])
+sc("private-urlbar", DARK, seq=[PRIV, 2500, PRIV_TABS + "w.gURLBar.focus(); w.gURLBar.search('c');", 2500, "SHOT"])
+sc("private-permanent", DARK + ["browser.privatebrowsing.autostart=true"], seq=[OPEN5, 2500, "SHOT"])
 sc("many-tabs", DARK, seq=[PRELUDE + "for (let i = 0; i < 30; i++) gBrowser.addTrustedTab(url(['cascade','notes','hn','rust','wiki'][i%5])); gBrowser.removeTab(gBrowser.tabs[0]); gBrowser.selectedTab = gBrowser.tabs[12];", 3500, "SHOT"])
 sc("downloads-panel", DARK, seq=[OPEN5, 2500, PRELUDE + "DownloadsPanel.showPanel();", 1500, "SHOT"])
 sc("findbar", DARK, seq=[OPEN5, 2500, PRELUDE + "gLazyFindCommand('onFindCommand');", 1500, "SHOT"])
@@ -90,7 +96,16 @@ sc("status", DARK, seq=[OPEN5, 2500, PRELUDE + "XULBrowserWindow.setOverLink('ht
 sc("customize", DARK, seq=[OPEN5, 2500, PRELUDE + "gCustomizeMode.enter();", 3500, "SHOT"])
 sc("menubar", DARK, seq=[OPEN5, 2500, PRELUDE + "setToolbarVisibility(document.getElementById('toolbar-menubar'), true);", 1500, "SHOT"])
 sc("menubar-alt", DARK, seq=[OPEN5, 2500, PRELUDE + "document.getElementById('toolbar-menubar').removeAttribute('inactive');", 1200, "SHOT"])
-sc("forced-colors", DARK + ["ui.useAccessibilityTheme=1", "browser.display.document_color_use=2"], seq=[OPEN5, 2500, "SHOT"])
+# high contrast: Linux never turns on forced colours by itself, so force them
+# on the window, with the system colours of the Windows »High Contrast Black«
+FORCED = DARK + ["ui.useAccessibilityTheme=1", "ui.window=#000000", "ui.windowtext=#ffffff",
+    "ui.-moz-field=#000000", "ui.-moz-fieldtext=#ffffff", "ui.buttonface=#000000", "ui.buttontext=#ffffff",
+    "ui.highlight=#1aebff", "ui.highlighttext=#000000", "ui.selecteditem=#1aebff", "ui.selecteditemtext=#000000",
+    "ui.graytext=#3ff23f", "ui.menu=#000000", "ui.menutext=#ffffff"]
+FORCE = "window.browsingContext.forcedColorsOverride = 'active';"
+sc("forced-colors", FORCED, seq=[OPEN5 + FORCE, 2500, "SHOT"])
+sc("forced-colors-urlbar", FORCED, seq=[OPEN5 + FORCE, 2500, PRELUDE + "gURLBar.focus(); gURLBar.search('c');", 2000, "SHOT"])
+sc("forced-colors-appmenu", FORCED, seq=[OPEN5 + FORCE, 2500, PRELUDE + "PanelUI.show();", 1500, "SHOT"])
 sc("notification", DARK, seq=[OPEN5, 2500, PRELUDE + "gNotificationBox.appendNotification('test', {label: 'Firefox is not your default browser', priority: gNotificationBox.PRIORITY_INFO_MEDIUM}, [{label: 'Set as default'}]);", 1500, "SHOT"])
 sc("identity-panel", DARK, seq=[OPEN5, 2500, {"click_js": CENTER % "document.getElementById('identity-icon-box')"}, 1500, "SHOT"])
 sc("keyboard-nav", DARK, seq=[OPEN5, 2500, PRELUDE + "gURLBar.focus();", 500, {"xkey": "shift+Tab"}, 400, "SHOT"])

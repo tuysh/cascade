@@ -18,14 +18,20 @@ digno de usarse a diario. Si una sesión se corta, **retomar desde "Siguiente pa
 | 3 | Auditoría con agentes (9 áreas) + verificación adversarial de cada hallazgo | hecho (146 hallazgos; 51 verificados por 2 agentes, el resto se verifica al implementar en Firefox real) |
 | 4 | Implementar los hallazgos confirmados en commits pequeños | hecho (B1–B16) |
 | 5 | Capturas "después" y comparación con "antes" | hecho (39 escenarios, sin regresiones) |
-| 6 | Revisión independiente del diff final | en curso |
+| 6 | Revisión independiente del diff final (4 revisores + verificador por hallazgo) | hecho (18 hallazgos confirmados, 12 problemas distintos, todos corregidos; 42 escenarios sin regresiones) |
 
 ## Siguiente paso
 
-Fase 6: revisar el diff completo (`git diff 7407005..HEAD -- chrome integrations`)
-con revisores independientes, corregir lo confirmado y repetir las capturas. Luego
-quedan los pendientes anotados en la tabla (colours-11, config-13, tabs-15/16,
-palettes-14, CI). Para referencia, la fase 4 consistió en:
+Las 6 fases están hechas y subidas. Lo que queda es opcional y está anotado en la
+tabla del plan: colours-11 (temas ligeros: decidir si gana la paleta o el tema),
+config-13 (renombrar opciones con fallbacks), tabs-15/16, palettes-14, urlbar-15,
+extensions-11 y un CI que ejecute `tools/firefox-harness/validate.py`. La web de
+documentación externa (cascadefox.github.io) todavía dice a los usuarios de
+Windows que usen `cascade-responsive-windows-fix.css` y no tiene las notas de
+actualización (están en el README). Antes de tocar nada: `validate.py` y el arnés
+de capturas (ver "Entorno para retomar"); comparar con `shots/final`.
+
+Para referencia, la fase 4 consistió en:
 implementar los bloques de "Plan de implementación" en orden, marcando cada uno
 como hecho (con su commit) al terminarlo. El detalle completo de cada hallazgo
 (problema, evidencia con archivo:línea de Firefox 160, arreglo propuesto y, si lo
@@ -203,6 +209,42 @@ problema visto desde áreas distintas. Orden = prioridad.
   userChrome.css explica cómo cambiar al config de ratón y a una integración de
   color; `.editorconfig` (contributing.md lo citaba y no existía).
 
+### Fase 6: revisión independiente
+
+Cuatro revisores (corrección, regresiones, compatibilidad, accesibilidad/color)
+con un verificador adversarial por hallazgo, todos con Firefox 160 real.
+Corregido, y comprobado otra vez en Firefox real:
+
+- **Ventanas privadas**: el tinte bajaba el contraste de la barra de URL por
+  debajo de AA (hasta 2,2:1) y la forma documentada de quitarlo creaba un ciclo
+  de variables que dejaba la barra sin fondo. Ahora el tinte es el color de la
+  barra girado a violeta con la misma luminosidad (mismo contraste que en una
+  ventana normal) y se aplica a las variables de Firefox, sin ciclo.
+- **Alto contraste**: el bloque forced-colors ponía CanvasText sobre SelectedItem
+  (≈1,5:1). Ahora las superficies son Canvas/Field y SelectedItem solo va con
+  SelectedItemText (pestaña activa, menú, autocompletado); los botones de los
+  paneles usan los colores de sistema de Firefox.
+- **Acento**: la marca del resultado seleccionado, el punto de atención y la línea
+  de la pestaña activa usan el acento legible (`--uc-accent-text-colour`); su
+  límite pasa a 0,78/0,48 para llegar a 4,5:1 en todas las paletas.
+  Botón primario: hover/activo se alejan del color de la etiqueta.
+- `prefers-contrast`: Firefox vuelve a reforzar el texto secundario de los
+  resultados.
+- Linux sin compositor: tooltips y vista previa de pestaña cuadrados (antes con
+  esquinas negras).
+- Barra de búsqueda en la barra de navegación: el fondo de sus resultados ya no se
+  recorta.
+- Botón de cerrar siempre visible: cada pestaña se mide a sí misma (container
+  query) en vez de depender de la primera pestaña que mide Firefox.
+- Configs y userChrome.css viejos: los indicadores de cámara/micrófono se muestran
+  aunque el config viejo oculte su caja; el panel de estado y los menús tienen su
+  borde/colores con un userChrome.css sin `cascade-panels.css`.
+- Pestañas verticales: el botón »+« al final de la lista desbordada ya no se oculta.
+- README: sección »Updating from an older version«.
+- Arnés: ventana privada real (`privatebrowsingmode="temporary"`) y alto contraste
+  forzado de verdad (`forcedColorsOverride` + colores de sistema de »High Contrast
+  Black«); antes esos dos escenarios no ejercitaban nada.
+
 ## Notas de migración para usuarios (para el changelog)
 
 - Si editaste el mapeo de colores dentro de tu `cascade-colours.css`, mueve esos
@@ -213,6 +255,10 @@ problema visto desde áreas distintas. Orden = prioridad.
   config nuevo. Borra también, si los tienes, `#pageActionButton {display:none}`,
   `.urlbar-page-action > image {margin-top…}` y `#alltabs-button {margin-top:5px}`.
 - `cascade-responsive-windows-fix.css` ya no hace falta en Windows.
+- Config antiguo: `--uc-tab-margin: var(--tab-margin-block)` hace las pestañas
+  más altas que la barra de URL (usar el `calc()` del config nuevo); en macOS,
+  borrar `.titlebar-buttonbox-container { display: none }`. Todo esto está en el
+  README (»Updating from an older version«).
 - **B15** `fix(integrations)`: Tab Center Reborn: ya no oculta la cabecera de todos
   los paneles laterales, respeta »barra lateral a la derecha« y RTL, sin el hueco de
   7px, sin selectores muertos, retardo al expandir y `prefers-reduced-motion`,
