@@ -111,6 +111,15 @@
    */
   --uc-urlbar-colour: var(--uc-highlight-colour);
   --uc-urlbar-selection-colour: var(--uc-base-colour);
+
+  /*  Background of the URL Bar in private windows
+   *  var(--uc-urlbar-colour) makes them look like the others
+   */
+  --uc-private-urlbar-colour: color-mix(
+    in srgb,
+    var(--uc-identity-colour-purple) 25%,
+    var(--uc-highlight-colour)
+  );
 }
 
 /* Disable the Navigation Buttons */

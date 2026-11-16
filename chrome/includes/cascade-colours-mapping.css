@@ -11,6 +11,13 @@
   --uc-urlbar-colour: var(--uc-highlight-colour);
   --uc-urlbar-selection-colour: var(--uc-base-colour);
 
+  /* the URL Bar of private windows, see cascade-config.css */
+  --uc-private-urlbar-colour: color-mix(
+    in srgb,
+    var(--uc-identity-colour-purple) 25%,
+    var(--uc-highlight-colour)
+  );
+
   /* container colours added after some palettes were written */
   --uc-identity-colour-violet: var(--uc-identity-colour-purple);
   --uc-identity-colour-gray: var(--uc-muted-colour);
@@ -24,6 +31,14 @@
   --toolbox-text-color-inactive: var(--uc-muted-colour) !important;
   --lwt-accent-color: var(--uc-base-colour) !important;
   --lwt-text-color: var(--uc-inverted-colour) !important;
+  /* Nova paints a violet to orange gradient behind the toolbars, which
+     shows around the page and behind vertical tabs */
+  --toolbox-background-gradient: none !important;
+
+  /* text and icons (Nova tints them violet); icons follow the colour of
+     the text next to them */
+  --text-color: var(--uc-inverted-colour) !important;
+  --toolbarbutton-icon-fill: currentColor !important;
 
   /* toolbars */
   --toolbar-background-color: var(--uc-base-colour) !important;
@@ -79,10 +94,12 @@
   --urlbarview-text-color-selected: var(--uc-inverted-colour) !important;
   --urlbarview-text-color-action: var(--uc-muted-colour) !important;
   --urlbarview-separator-color: var(--uc-urlbar-selection-colour) !important;
+  --urlbarview-text-color-secondary: var(--uc-muted-colour) !important;
 
   /* sidebar */
   --sidebar-background-color: var(--uc-base-colour) !important;
   --sidebar-text-color: var(--uc-inverted-colour) !important;
+  --sidebar-border-color: transparent !important;
 
   /* Firefox's own accent: links, checkboxes, primary buttons, the starred
      bookmark, the loading throbber and the attention dot follow these */
@@ -125,69 +142,76 @@
   }
 }
 
+/* private windows get their own URL Bar colour */
+:root[privatebrowsingmode="temporary"] {
+  --uc-urlbar-colour: var(--uc-private-urlbar-colour);
+}
+
+/* notification bars (»Firefox is not your default browser«, …); warnings
+   and errors keep their own icon colours */
+notification-message.infobar {
+  --info-bar-background-color: var(--uc-base-colour) !important;
+  --info-bar-text-color: var(--uc-inverted-colour) !important;
+  --info-bar-border-color: var(--uc-highlight-colour) !important;
+
+  &[type="info"] {
+    --message-bar-icon-color: var(--uc-accent-colour) !important;
+  }
+  &::before {
+    display: none !important;
+  }
+}
+
+/* login and form history suggestions */
+.autocomplete-richlistitem[selected] {
+  background-color: var(--uc-highlight-colour) !important;
+  color: var(--uc-inverted-colour) !important;
+}
+
 /* URLs inside the URL bar results */
 .urlbarView-url {
   color: var(--uc-accent-text-colour) !important;
 }
 
-/* Container Tabs */
+/* Container Tabs: each class picks its palette colour; the colour of
+   names and icons is mixed with the text colour so they stay readable */
 .identity-color-blue {
-  --identity-tab-color: var(--uc-identity-colour-blue) !important;
-  --identity-icon-color: var(--uc-identity-colour-blue) !important;
-  --identity-fill-color: var(--uc-identity-colour-blue) !important;
-  --identity-stroke-color: var(--uc-identity-colour-blue) !important;
+  --uc-identity: var(--uc-identity-colour-blue);
 }
 .identity-color-cyan {
-  --identity-tab-color: var(--uc-identity-colour-turquoise) !important;
-  --identity-icon-color: var(--uc-identity-colour-turquoise) !important;
-  --identity-fill-color: var(--uc-identity-colour-turquoise) !important;
-  --identity-stroke-color: var(--uc-identity-colour-turquoise) !important;
+  --uc-identity: var(--uc-identity-colour-turquoise);
 }
 .identity-color-green {
-  --identity-tab-color: var(--uc-identity-colour-green) !important;
-  --identity-icon-color: var(--uc-identity-colour-green) !important;
-  --identity-fill-color: var(--uc-identity-colour-green) !important;
-  --identity-stroke-color: var(--uc-identity-colour-green) !important;
+  --uc-identity: var(--uc-identity-colour-green);
 }
 .identity-color-yellow {
-  --identity-tab-color: var(--uc-identity-colour-yellow) !important;
-  --identity-icon-color: var(--uc-identity-colour-yellow) !important;
-  --identity-fill-color: var(--uc-identity-colour-yellow) !important;
-  --identity-stroke-color: var(--uc-identity-colour-yellow) !important;
+  --uc-identity: var(--uc-identity-colour-yellow);
 }
 .identity-color-orange {
-  --identity-tab-color: var(--uc-identity-colour-orange) !important;
-  --identity-icon-color: var(--uc-identity-colour-orange) !important;
-  --identity-fill-color: var(--uc-identity-colour-orange) !important;
-  --identity-stroke-color: var(--uc-identity-colour-orange) !important;
+  --uc-identity: var(--uc-identity-colour-orange);
 }
 .identity-color-red {
-  --identity-tab-color: var(--uc-identity-colour-red) !important;
-  --identity-icon-color: var(--uc-identity-colour-red) !important;
-  --identity-fill-color: var(--uc-identity-colour-red) !important;
-  --identity-stroke-color: var(--uc-identity-colour-red) !important;
+  --uc-identity: var(--uc-identity-colour-red);
 }
 .identity-color-pink {
-  --identity-tab-color: var(--uc-identity-colour-pink) !important;
-  --identity-icon-color: var(--uc-identity-colour-pink) !important;
-  --identity-fill-color: var(--uc-identity-colour-pink) !important;
-  --identity-stroke-color: var(--uc-identity-colour-pink) !important;
+  --uc-identity: var(--uc-identity-colour-pink);
 }
 .identity-color-purple {
-  --identity-tab-color: var(--uc-identity-colour-purple) !important;
-  --identity-icon-color: var(--uc-identity-colour-purple) !important;
-  --identity-fill-color: var(--uc-identity-colour-purple) !important;
-  --identity-stroke-color: var(--uc-identity-colour-purple) !important;
+  --uc-identity: var(--uc-identity-colour-purple);
 }
 .identity-color-violet {
-  --identity-tab-color: var(--uc-identity-colour-violet) !important;
-  --identity-icon-color: var(--uc-identity-colour-violet) !important;
-  --identity-fill-color: var(--uc-identity-colour-violet) !important;
-  --identity-stroke-color: var(--uc-identity-colour-violet) !important;
+  --uc-identity: var(--uc-identity-colour-violet);
 }
 .identity-color-gray {
-  --identity-tab-color: var(--uc-identity-colour-gray) !important;
-  --identity-icon-color: var(--uc-identity-colour-gray) !important;
-  --identity-fill-color: var(--uc-identity-colour-gray) !important;
-  --identity-stroke-color: var(--uc-identity-colour-gray) !important;
+  --uc-identity: var(--uc-identity-colour-gray);
+}
+[class*="identity-color-"] {
+  --identity-tab-color: var(--uc-identity) !important;
+  --identity-icon-color: var(--uc-identity) !important;
+  --identity-stroke-color: var(--uc-identity) !important;
+  --identity-fill-color: color-mix(
+    in srgb,
+    var(--uc-identity) 60%,
+    var(--uc-inverted-colour)
+  ) !important;
 }

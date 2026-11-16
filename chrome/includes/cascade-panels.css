@@ -5,7 +5,7 @@
    so colour integrations do not need their own copy of this file. */
 
 :root,
-menupopup,
+menupopup:not([customoptionstyling="true"]),
 panel {
   --uc-panel-border-colour: color-mix(
     in srgb,
@@ -30,11 +30,24 @@ panel {
   --button-text-color-primary-active: var(--uc-primary-text-colour) !important;
   --button-text-color-primary-disabled: var(--uc-primary-text-colour) !important;
   --button-background-color-primary-disabled: var(--uc-accent-colour) !important;
+
+  /* info cards: sign-in promo and messages in the app menu, the site
+     information panel; its warnings stay red */
+  --background-color-information: var(--uc-highlight-colour) !important;
+  --promo-background-color-vibrant: var(--uc-highlight-colour) !important;
+  --promo-message-text-color-vibrant: var(--uc-inverted-colour) !important;
+  --promo-border-color-vibrant: var(--uc-panel-border-colour) !important;
+  --trustpanel-highlight-bg: var(--uc-highlight-colour) !important;
+  --trustpanel-graphic-bg: var(--uc-highlight-colour) !important;
+  --trustpanel-inner-border: 1px solid var(--uc-panel-border-colour) !important;
+  --trustpanel-card-border-color: var(--uc-panel-border-colour) !important;
+  --trustpanel-card-divider-color: var(--uc-panel-border-colour) !important;
 }
 
 /* Firefox resolves its button tokens on :root, so the ones derived from
-   others (ghost → menu, primary → accent) have to be set one by one */
-menupopup,
+   others (ghost → menu, primary → accent) have to be set one by one.
+   <select> menus a page styled keep its colours */
+menupopup:not([customoptionstyling="true"]),
 panel {
   --text-color: var(--uc-inverted-colour) !important;
   --text-color-deemphasized: var(--uc-muted-colour) !important;
@@ -105,10 +118,19 @@ panel {
   border-color: var(--uc-accent-colour) !important;
 }
 
-/* context menus and dropdowns use system colours directly */
-menupopup {
+/* context menus and dropdowns use system colours directly; the popup
+   paints its background itself, rounded and with a shadow */
+menupopup:not([customoptionstyling="true"]) {
+  color: var(--uc-inverted-colour) !important;
+}
+
+/* tooltips (they carry the keyboard shortcuts) */
+tooltip {
+  appearance: none !important;
   background-color: var(--uc-base-colour) !important;
   color: var(--uc-inverted-colour) !important;
+  border: 1px solid var(--uc-panel-border-colour) !important;
+  border-radius: var(--uc-border-radius) !important;
 }
 
 menupopup :is(menuitem, menu) {
