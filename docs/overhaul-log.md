@@ -49,6 +49,9 @@ python3 tools/firefox-harness/scenarios.py --chrome chrome --label after --jobs 
 #    --only dark,light,urlbar-open   para un subconjunto
 ```
 
+- `python3 tools/firefox-harness/validate.py`: pregunta a Firefox (`CSS.supports`)
+  si cada selector y declaración del tema es válido (Firefox no informa errores de
+  userChrome.css en ningún sitio). Estado actual: 952 comprobados, 0 inválidos.
 - Para tener una referencia "antes": `git worktree add /tmp/cascade-before <commit>` y
   pasar `--chrome /tmp/cascade-before/chrome --label before`.
 - Variables: `CASCADE_HARNESS_DIR` (carpeta de trabajo), `FIREFOX_BIN` (binario).
