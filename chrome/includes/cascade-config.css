@@ -118,15 +118,19 @@
 /* #tracking-protection-icon-container { display: none !important; } */
 
 /* Encryption and Permissions icons */
-/* Only hides permission items */
-#identity-permission-box {
+/* Only hides permission items; the red camera, microphone, screen
+   and location icons still show while a site is using them */
+#identity-box > #identity-permission-box:not([hasSharingIcon]),
+#identity-box #permissions-granted-icon,
+#identity-box #blocked-permissions-container {
   display: none !important;
 }
 /* Hides extension page box */
 #identity-box.extensionPage {
   display: none !important;
 }
-/* Hides encryption AND permission items */
+/* Hides encryption, permission AND the camera / microphone / location
+   sharing items */
 /* #identity-box { display: none !important } */
 
 /* Hide everything BUT the zoom indicator within the URL Bar */
