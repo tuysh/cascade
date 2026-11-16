@@ -130,6 +130,11 @@
   --uc-active-tab-width: clamp(100px, 30vw, 300px);
   --uc-inactive-tab-width: clamp(100px, 20vw, 200px);
 
+  /*  Space between the edge of a tab and its
+   *  icon / label / close button
+   */
+  --uc-tab-padding: 14px;
+
   /*  Enable this to always show the Tab Close button
    *  possible values:
    *  show: flex

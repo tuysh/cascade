@@ -29,6 +29,11 @@
   max-width: var(--uc-inactive-tab-width) !important;
 }
 
+/* space between the tab edge and its content */
+:root {
+  --tab-padding-inline: var(--uc-tab-padding) !important;
+}
+
 /* container tabs indicator */
 #TabsToolbar .tab-context-line {
   margin: 2px var(--container-tabs-indicator-margin) 0
